@@ -1,16 +1,12 @@
-package com.deke.testredisdbjpa.entity;
+package com.deke.testredisdbjpa.dto.request;
 
 
-import com.deke.testredisdbjpa.entity.baseEntity.BaseEntity;
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
-@Table(name="rooms")
 @Getter
 @Setter
-public class Room extends BaseEntity {
+public class RoomRequestDto {
 
     private String roomType;
     private int bedCount;

@@ -31,5 +31,9 @@ public class Hotel extends BaseEntity {
     @Column(name = "hotel_stars")
     private int star;
 
+    @JoinColumn(name = "room_id")
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Room> rooms;
+
 
 }
