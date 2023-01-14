@@ -23,13 +23,8 @@ public class HotelController {
     HotelService hotelService;
 
     @PostMapping(path = "/create-hotel")
-    public ResponseEntity<RestResponseEntity<HotelResponseDto>> createHotel(@RequestBody Hotel hotel) {
-        return ResponseEntity.ok(RestResponseEntity.response(hotelService.insert(hotel)));
-    }
-
-    @PostMapping(path = "/create-hotel2")
     public ResponseEntity<RestResponseEntity<HotelResponseDto>> createHotell(@RequestBody CreateHotelRequestDto createHotelRequestDto) {
-        return ResponseEntity.ok(RestResponseEntity.response(hotelService.addHotel(createHotelRequestDto.getSpecifications(), createHotelRequestDto.getHostelTypeNames())));
+        return ResponseEntity.ok(RestResponseEntity.response(hotelService.addHotel(createHotelRequestDto)));
     }
     @GetMapping(path = "/get-hotel-by-id/{id}")
     public ResponseEntity<RestResponseEntity<HotelResponseDto>> getById(@PathVariable String id) {

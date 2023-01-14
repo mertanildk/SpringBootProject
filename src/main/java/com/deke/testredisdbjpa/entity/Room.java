@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name="rooms")
 @Getter
@@ -20,4 +22,6 @@ public class Room extends BaseEntity {
     private double meterSquare;
     private boolean hasSafe;
     private boolean hasProjector;
+
+
 }

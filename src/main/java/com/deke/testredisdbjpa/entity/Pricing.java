@@ -1,10 +1,7 @@
 package com.deke.testredisdbjpa.entity;
 
 import com.deke.testredisdbjpa.entity.baseEntity.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 

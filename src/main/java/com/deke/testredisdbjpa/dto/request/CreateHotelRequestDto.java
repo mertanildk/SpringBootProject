@@ -10,6 +10,10 @@ import java.util.List;
 public class CreateHotelRequestDto {
 
     private String hotelName;
-    private List<String> specifications;
-    private List<String> hostelTypeNames;
+    private String hotelAddress;
+    private String hotelPhone;
+    private String hotelEmail;
+    private int star;
+    private List<String> roomIds;
+
 }

@@ -32,7 +32,7 @@ public class Hotel extends BaseEntity {
     private int star;
 
     @JoinColumn(name = "room_id")
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     private List<Room> rooms;
 
 

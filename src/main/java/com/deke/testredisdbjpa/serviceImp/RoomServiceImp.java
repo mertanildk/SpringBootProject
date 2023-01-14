@@ -9,12 +9,16 @@ import com.deke.testredisdbjpa.serviceImp.base.BaseServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
-@Service
+
+@Service("roomService")
 public class RoomServiceImp extends BaseServiceImp<Room, Room, RoomRepository, Room> implements RoomService {
 
-    @Autowired
-    private HotelService hotelService;
+
+
     @Override
     public Room addRoom(RoomRequestDto roomRequestDto) {
         Room room = new Room();
@@ -28,5 +32,16 @@ public class RoomServiceImp extends BaseServiceImp<Room, Room, RoomRepository, R
         room.setHasProjector(roomRequestDto.isHasProjector());
         getDao().save(room);
         return room;
+    }
+
+    @Override
+    public List<Room> findByIdList(List<String> idList) {
+        List<Room>roomList = new ArrayList<>();
+        for (String id : idList) {
+            Optional<Room> optionalRoom = getDao().findById(id);
+            optionalRoom.ifPresent(roomList::add);
+        }
+
+        return roomList;
     }
 }

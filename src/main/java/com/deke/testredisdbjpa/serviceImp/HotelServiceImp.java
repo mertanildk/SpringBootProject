@@ -1,5 +1,6 @@
 package com.deke.testredisdbjpa.serviceImp;
 
+import com.deke.testredisdbjpa.dto.request.CreateHotelRequestDto;
 import com.deke.testredisdbjpa.dto.request.HotelRequestDto;
 import com.deke.testredisdbjpa.dto.response.HotelResponseDto;
 import com.deke.testredisdbjpa.entity.Facility;
@@ -9,6 +10,7 @@ import com.deke.testredisdbjpa.repositories.HotelRepository;
 import com.deke.testredisdbjpa.service.FacilityService;
 import com.deke.testredisdbjpa.service.HostelTypeService;
 import com.deke.testredisdbjpa.service.HotelService;
+import com.deke.testredisdbjpa.service.RoomService;
 import com.deke.testredisdbjpa.serviceImp.base.BaseServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -27,7 +29,7 @@ public class HotelServiceImp extends BaseServiceImp<Hotel, Hotel, HotelRepositor
     private HotelRepository hotelRepository;
 
     @Autowired
-    private FacilityService facilityService;
+    private RoomService roomService;
 
     @Autowired
     private HostelTypeService hostelTypeService;
@@ -57,13 +59,15 @@ public class HotelServiceImp extends BaseServiceImp<Hotel, Hotel, HotelRepositor
     }
 
     @Override
-    public Hotel addHotel(List<String> specifications,List<String> hostelTypeNames) {
+    public Hotel addHotel(CreateHotelRequestDto createHotelRequestDto) {
         Hotel hotel = new Hotel();
-        List<Facility> facilities = facilityService.getBySpesiciations(specifications);
-        List<HostelType> hostelTypes = getHostelTypeByName(hostelTypeNames);
-        //hotel.setFacility(facilities);
-        //hotel.setHostelType(hostelTypes);
-        hotelRepository.save(hotel);
+        hotel.setHotelAddress(createHotelRequestDto.getHotelAddress());
+        hotel.setHotelName(createHotelRequestDto.getHotelName());
+        hotel.setHotelPhone(createHotelRequestDto.getHotelPhone());
+        hotel.setHotelEmail(createHotelRequestDto.getHotelEmail());
+        hotel.setStar(createHotelRequestDto.getStar());
+        hotel.setRooms(roomService.findByIdList(createHotelRequestDto.getRoomIds()));
+        getDao().save(hotel);
         return hotel;
     }
     private List<HostelType> getHostelTypeByName(List<String> hostelTypeNames) {
