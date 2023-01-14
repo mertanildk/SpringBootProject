@@ -11,6 +11,6 @@ import java.util.List;
 @Component
 public interface HotelFeatureRepository extends BaseRepository<HotelFeature> {
 
-    @Query("select f from HotelFeature f where f.hotel = :hotelId")
+    @Query("select f from HotelFeature f where f.hotelOid = :hotelId")
     List<HotelFeature> findAllByHotel(String hotelId);
 }

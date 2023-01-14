@@ -3,12 +3,8 @@ package com.deke.testredisdbjpa.serviceImp;
 
 import com.deke.testredisdbjpa.dto.request.CreateHotelFeatureRequestDto;
 import com.deke.testredisdbjpa.dto.request.HotelFeatureRequestDto;
-import com.deke.testredisdbjpa.dto.request.HotelRequestDto;
 import com.deke.testredisdbjpa.dto.response.HotelFeatureResponseDto;
-import com.deke.testredisdbjpa.dto.response.HotelResponseDto;
 import com.deke.testredisdbjpa.entity.Facility;
-import com.deke.testredisdbjpa.entity.HostelType;
-import com.deke.testredisdbjpa.entity.Hotel;
 import com.deke.testredisdbjpa.entity.HotelFeature;
 import com.deke.testredisdbjpa.repositories.HotelFeatureRepository;
 import com.deke.testredisdbjpa.service.FacilityService;
@@ -24,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service("hotelFeatureService")
 public class HotelFeatureServiceImp extends BaseServiceImp<HotelFeature, HotelFeature, HotelFeatureRepository, HotelFeature> implements HotelFeatureService {
@@ -48,10 +45,10 @@ public class HotelFeatureServiceImp extends BaseServiceImp<HotelFeature, HotelFe
         List<HotelFeature> hotelFeatures = new ArrayList<>();
         while (Math.max(facilitySize, hostelTypeSize) >= 0) {
             HotelFeature hotelFeature = new HotelFeature();
-            hotelFeature.setHotel(createHotelFeatureRequestDto.getHotelId());
-            hotelFeature.setFacility(--facilitySize >= 0 ? createHotelFeatureRequestDto.getFacilityIds().get(facilitySize) : null);
-            hotelFeature.setHostelType(--hostelTypeSize >= 0 ? createHotelFeatureRequestDto.getHostelTypeIds().get(hostelTypeSize) : null);
-            if (hotelFeature.getFacility() != null && hotelFeature.getHostelType() != null) {
+            hotelFeature.setHotelOid(createHotelFeatureRequestDto.getHotelId());
+            hotelFeature.setFacilityOid(--facilitySize >= 0 ? createHotelFeatureRequestDto.getFacilityIds().get(facilitySize) : null);
+            hotelFeature.setHostelTypeOid(--hostelTypeSize >= 0 ? createHotelFeatureRequestDto.getHostelTypeIds().get(hostelTypeSize) : null);
+            if (hotelFeature.getFacilityOid() != null && hotelFeature.getHostelTypeOid() != null) {
                 hotelFeatureRepository.save(hotelFeature);
                 hotelFeatures.add(hotelFeature);
             }
@@ -65,8 +62,6 @@ public class HotelFeatureServiceImp extends BaseServiceImp<HotelFeature, HotelFe
     public List<HotelFeature> findAllByHotelId(String hotelId) {
         return hotelFeatureRepository.findAllByHotel(hotelId);
     }
-    //eğer hotelFeature içinde eklemek istenen facilityler varsa onları eklemiyor
-    //eğer hotelFeature içinde eklemek istenen hostelType varsa onları eklemiyor
 
     @Override
     @CacheEvict(value = "hotelFeature", key = "#hotelId")
@@ -74,11 +69,11 @@ public class HotelFeatureServiceImp extends BaseServiceImp<HotelFeature, HotelFe
         List<HotelFeature> hotelFeatures = findAllByHotelId(hotelId);
         int index = 0;
         for (HotelFeature hotelFeature : hotelFeatures) {
-            if (!hotelFeatureRequestDto.getFacilities().contains(hotelFeature.getFacility())) {
+            if (!hotelFeatureRequestDto.getFacilities().contains(hotelFeature.getFacilityOid())) {
                 HotelFeature hotelFeature1 = new HotelFeature();
-                hotelFeature1.setHotel(hotelId);
-                hotelFeature1.setFacility(hotelFeatureRequestDto.getFacilities().get(index));
-                hotelFeature1.setHostelType(hotelFeatureRequestDto.getHostelTypes().get(index++));
+                hotelFeature1.setHotelOid(hotelId);
+                hotelFeature1.setFacilityOid(hotelFeatureRequestDto.getFacilities().get(index));
+                hotelFeature1.setHostelTypeOid(hotelFeatureRequestDto.getHostelTypes().get(index++));
                 hotelFeatures.add(hotelFeature1);
             }
         }
@@ -86,5 +81,15 @@ public class HotelFeatureServiceImp extends BaseServiceImp<HotelFeature, HotelFe
         return hotelFeatures;
 
 
+    }
+
+    @Override
+    public HotelFeatureResponseDto showHotelFeatures(String hotelId){
+        List<HotelFeature> hotelFeatures = findAllByHotelId(hotelId);
+        HotelFeatureResponseDto hotelFeatureResponseDto = new HotelFeatureResponseDto();
+        hotelFeatureResponseDto.setHotel(hotelService.findOne(hotelId).isPresent()?hotelService.findOne(hotelId).get():null);
+        hotelFeatureResponseDto.setFacilities(facilityService.findAllByIdList(hotelFeatures.stream().map(HotelFeature::getFacilityOid).collect(Collectors.toList())));
+        hotelFeatureResponseDto.setHostelTypes(hostelTypeService.findAllByIdList(hotelFeatures.stream().map(HotelFeature::getHostelTypeOid).collect(Collectors.toList())));
+        return  hotelFeatureResponseDto;
     }
 }

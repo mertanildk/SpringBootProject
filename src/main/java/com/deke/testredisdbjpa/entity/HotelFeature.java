@@ -14,12 +14,12 @@ import lombok.Setter;
 public class HotelFeature extends BaseEntity {
 
     @Column(name = "hotel_id")
-    private String hotel;
+    private String hotelOid;
 
     @Column(name = "facility_id")
-    private String facility;
+    private String facilityOid;
 
     @Column(name = "hostel_type_id")
-    private String hostelType;
+    private String hostelTypeOid;
 
 }

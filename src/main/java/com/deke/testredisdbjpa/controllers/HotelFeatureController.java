@@ -3,6 +3,7 @@ package com.deke.testredisdbjpa.controllers;
 
 import com.deke.testredisdbjpa.dto.request.CreateHotelFeatureRequestDto;
 import com.deke.testredisdbjpa.dto.request.HotelFeatureRequestDto;
+import com.deke.testredisdbjpa.dto.response.HotelFeatureResponseDto;
 import com.deke.testredisdbjpa.dto.response.HotelResponseDto;
 import com.deke.testredisdbjpa.entity.HotelFeature;
 import com.deke.testredisdbjpa.responseApi.RestResponseEntity;
@@ -34,5 +35,10 @@ public class HotelFeatureController {
     public ResponseEntity<RestResponseEntity<List<HotelFeature>>> updateHotelFeature(@PathVariable String id,
                                                                                      @RequestBody HotelFeatureRequestDto hotelFeatureRequestDto){
         return ResponseEntity.ok(RestResponseEntity.response(hotelFeatureService.updateHotelFeature(id, hotelFeatureRequestDto)));
+    }
+
+    @GetMapping("/get-all-hotel-feature-by-hotel-id/{id}")
+    public ResponseEntity<RestResponseEntity<HotelFeatureResponseDto>> getHotelFeatureByHotelId(@PathVariable String id){
+        return ResponseEntity.ok(RestResponseEntity.response(hotelFeatureService.showHotelFeatures(id)));
     }
 }

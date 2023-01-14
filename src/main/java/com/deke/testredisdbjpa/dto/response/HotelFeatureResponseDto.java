@@ -1,5 +1,8 @@
 package com.deke.testredisdbjpa.dto.response;
 
+import com.deke.testredisdbjpa.entity.Facility;
+import com.deke.testredisdbjpa.entity.HostelType;
+import com.deke.testredisdbjpa.entity.Hotel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,8 +14,8 @@ import java.util.List;
 @Setter
 public class HotelFeatureResponseDto{
 
-    HotelResponseDto hotelResponseDto;
-    private List<String> hostelType;
-    private List<String> facilities;
+    private Hotel hotel;
+    private List<HostelType> hostelTypes;
+    private List<Facility> facilities;
 
 }
