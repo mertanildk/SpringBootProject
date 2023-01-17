@@ -28,6 +28,6 @@ public class HotelController {
     }
     @GetMapping(path = "/get-hotel-by-id/{id}")
     public ResponseEntity<RestResponseEntity<HotelResponseDto>> getById(@PathVariable String id) {
-        return ResponseEntity.ok(RestResponseEntity.response(hotelService.getByHotelId(id)));
+        return ResponseEntity.ok(RestResponseEntity.response(hotelService.findOne(id)));
     }
 }

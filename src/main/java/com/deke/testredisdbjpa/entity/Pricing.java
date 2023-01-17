@@ -2,25 +2,31 @@ package com.deke.testredisdbjpa.entity;
 
 import com.deke.testredisdbjpa.entity.baseEntity.BaseEntity;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 
+@Builder
 @Getter @Setter @Entity
 @Table(name = "pricing")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Pricing extends BaseEntity {
 
     @JoinColumn(name = "hotel_id")
-    private String hotelOid;
+    @OneToOne
+    private Hotel hotel;
 
     @JoinColumn(name="period_id")
-    private String periodOid;
+    @OneToOne
+    private Period period;
 
     @JoinColumn(name="room_id")
-    private String roomOid;
+    @OneToOne
+    private Room room;
 
     @JoinColumn(name="hostel_type_id")
-    private String hostelTypeOid;
+    @OneToOne
+    private HostelType hostelType;
 
     @Column(name = "adult_price")
     private Double adultPrice;
@@ -30,8 +36,4 @@ public class Pricing extends BaseEntity {
 
     @Column(name="money_type")
     private String moneyType;
-
-
-
-
 }

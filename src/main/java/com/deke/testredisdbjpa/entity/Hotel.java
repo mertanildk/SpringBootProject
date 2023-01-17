@@ -3,15 +3,13 @@ package com.deke.testredisdbjpa.entity;
 
 import com.deke.testredisdbjpa.entity.baseEntity.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Table(name = "hotels")
 @Entity
+@Builder
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor

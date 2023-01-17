@@ -3,23 +3,29 @@ package com.deke.testredisdbjpa.entity;
 
 import com.deke.testredisdbjpa.entity.baseEntity.BaseEntity;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "hotel_features")
 public class HotelFeature extends BaseEntity {
 
-    @Column(name = "hotel_id")
-    private String hotelOid;
+    @JoinColumn(name = "hotel_id")
+    @ManyToOne
+    private Hotel hotel;
 
-    @Column(name = "facility_id")
-    private String facilityOid;
 
-    @Column(name = "hostel_type_id")
-    private String hostelTypeOid;
+    @JoinColumn(name = "facility_id")
+    @ManyToOne
+    private Facility facility;
+
+    @JoinColumn(name = "hostel_type_id")
+    @ManyToOne
+    private HostelType hostelType;
 
 }
