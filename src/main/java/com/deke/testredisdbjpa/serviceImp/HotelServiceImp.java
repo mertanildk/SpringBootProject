@@ -33,7 +33,6 @@ public class HotelServiceImp extends BaseServiceImp<Hotel, Hotel, HotelRepositor
                 .hotelPhone(createHotelRequestDto.getHotelPhone())
                 .hotelEmail(createHotelRequestDto.getHotelEmail())
                 .star(createHotelRequestDto.getStar())
-                .rooms(roomService.findByIdList(createHotelRequestDto.getRoomIds()))
                 .build();
         getDao().save(hotel);
         return hotel;

@@ -6,28 +6,29 @@ import com.deke.testredisdbjpa.repositories.PricingRepository;
 import com.deke.testredisdbjpa.service.*;
 import com.deke.testredisdbjpa.serviceImp.base.BaseServiceImp;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 @Service("pricingService")
 public class PricingServiceImp extends BaseServiceImp<Pricing, Pricing, PricingRepository, Pricing> implements PricingService {
-    @Autowired
-    private HotelService hotelService;
 
-    @Autowired
-    private RoomService roomService;
+    private final HotelService hotelService;
+    private final RoomService roomService;
+    private final PeriodService periodService;
+    private final HostelTypeService hostelTypeService;
 
-    @Autowired
-    private PeriodService periodService;
+    public PricingServiceImp(HotelService hotelService, RoomService roomService, PeriodService periodService, HostelTypeService hostelTypeService) {
+        this.hotelService = hotelService;
+        this.roomService = roomService;
+        this.periodService = periodService;
+        this.hostelTypeService = hostelTypeService;
+    }
 
-    @Autowired
-    private HostelTypeService hostelTypeService;
 
     @Override
+    @SneakyThrows
     public String getPricingDetailById(String id) {
-        Pricing pricing = getDao().findById(id).get();
-
+        Pricing pricing = getDao().findById(id).orElseThrow(()->new Exception("Pricing not found"));
         return "hotel name = " + pricing.getHotel().getHotelName() +
                 " room name = " + pricing.getRoom().getRoomType() +
                 " period name = " + pricing.getPeriod().getPeriodName() +
@@ -47,6 +48,5 @@ public class PricingServiceImp extends BaseServiceImp<Pricing, Pricing, PricingR
                 .childPrice(pricingRequestDto.getChildPrice())
                 .moneyType(pricingRequestDto.getMoneyType())
                 .build());
-
     }
 }

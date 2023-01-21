@@ -28,8 +28,4 @@ public class Hotel extends BaseEntity {
 
     @Column(name = "hotel_stars")
     private int star;
-
-    @JoinColumn(name = "room_id")
-    @ManyToMany
-    private List<Room> rooms;
 }

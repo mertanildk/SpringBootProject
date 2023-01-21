@@ -1,39 +1,33 @@
 package com.deke.testredisdbjpa.serviceImp;
 
-import com.deke.testredisdbjpa.entity.Hotel;
+import com.deke.testredisdbjpa.dto.request.SearchRequestDto;
 import com.deke.testredisdbjpa.service.HotelService;
+import com.deke.testredisdbjpa.service.PricingService;
 import com.deke.testredisdbjpa.service.SearchService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Date;
 import java.util.stream.StreamSupport;
 
 
 @Service("searchService")
 public class SearchServiceImp implements SearchService {
+    private final PricingService pricingService;
 
-    @Autowired
-    private HotelService hotelService;
+    public SearchServiceImp(PricingService pricingService) {
+        this.pricingService = pricingService;
+    }
 
     @Override
-    public Object search(String keyword) {
-        Iterable<Hotel> hotels = hotelService.findAll();
-        List<Hotel> hotelContainsKeyword = new ArrayList<>();
-        hotels.forEach(hotel -> {
-            if (hotel.getHotelName().contains(keyword)) {
-                hotelContainsKeyword.add(hotel);
-            }
-        });
+    public Object searchByCityEntryDayEndDateAndGuest(SearchRequestDto searchRequestDto) {
 
-        List<Hotel> hotelList = StreamSupport.stream(hotels.spliterator(), false).collect(Collectors.toList());
-        hotelList.remove(1);
-
-
-
-        return hotelContainsKeyword;
-
+        return StreamSupport.stream(pricingService.findAll().spliterator(), false)
+                .filter(pricing ->
+                        pricing.getHotel().getHotelAddress().contains(searchRequestDto.getCity()) &&
+                                pricing.getPeriod().getStartDate().before(searchRequestDto.getEntryDay()) &&
+                                searchRequestDto.getEntryDay().before(searchRequestDto.getEndDate()) &&
+                                pricing.getPeriod().getEndDate().after(searchRequestDto.getEndDate()) &&
+                                pricing.getRoom().getBedCount() >= searchRequestDto.getBedCount()
+                ).toList();
     }
 }
