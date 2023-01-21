@@ -7,11 +7,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
+
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "hotel_rooms")
 @Entity @Getter @Setter
 public class HotelRoom extends BaseEntity {
+
 
     @JoinColumn(name = "hotel_id")
     @ManyToOne
@@ -26,4 +28,9 @@ public class HotelRoom extends BaseEntity {
 
     @Column(name="active_room_count")
     private int activeRoomCount;
+
+    public void setRoomCount(int roomCount) {
+        this.roomCount = roomCount;
+        this.activeRoomCount=roomCount;
+    }
 }
