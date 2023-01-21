@@ -9,11 +9,11 @@ import java.util.List;
 
 @Table(name = "hotels")
 @Entity
-@Builder
-@Getter @Setter
+@Builder @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Hotel extends BaseEntity {
+
     @Column(name = "hotel_name")
     private String hotelName;
 
@@ -32,6 +32,4 @@ public class Hotel extends BaseEntity {
     @JoinColumn(name = "room_id")
     @ManyToMany
     private List<Room> rooms;
-
-
 }

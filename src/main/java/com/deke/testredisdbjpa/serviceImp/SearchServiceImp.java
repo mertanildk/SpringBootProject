@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 
 @Service("searchService")
@@ -25,6 +27,12 @@ public class SearchServiceImp implements SearchService {
                 hotelContainsKeyword.add(hotel);
             }
         });
+
+        List<Hotel> hotelList = StreamSupport.stream(hotels.spliterator(), false).collect(Collectors.toList());
+        hotelList.remove(1);
+
+
+
         return hotelContainsKeyword;
 
     }

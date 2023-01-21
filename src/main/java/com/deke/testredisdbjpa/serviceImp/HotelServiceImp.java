@@ -1,13 +1,8 @@
 package com.deke.testredisdbjpa.serviceImp;
 
 import com.deke.testredisdbjpa.dto.request.CreateHotelRequestDto;
-import com.deke.testredisdbjpa.dto.request.HotelRequestDto;
-import com.deke.testredisdbjpa.dto.response.HotelResponseDto;
-import com.deke.testredisdbjpa.entity.Facility;
-import com.deke.testredisdbjpa.entity.HostelType;
 import com.deke.testredisdbjpa.entity.Hotel;
 import com.deke.testredisdbjpa.repositories.HotelRepository;
-import com.deke.testredisdbjpa.service.FacilityService;
 import com.deke.testredisdbjpa.service.HostelTypeService;
 import com.deke.testredisdbjpa.service.HotelService;
 import com.deke.testredisdbjpa.service.RoomService;
@@ -38,7 +33,8 @@ public class HotelServiceImp extends BaseServiceImp<Hotel, Hotel, HotelRepositor
                 .hotelPhone(createHotelRequestDto.getHotelPhone())
                 .hotelEmail(createHotelRequestDto.getHotelEmail())
                 .star(createHotelRequestDto.getStar())
-                .rooms(roomService.findByIdList(createHotelRequestDto.getRoomIds())).build();
+                .rooms(roomService.findByIdList(createHotelRequestDto.getRoomIds()))
+                .build();
         getDao().save(hotel);
         return hotel;
     }

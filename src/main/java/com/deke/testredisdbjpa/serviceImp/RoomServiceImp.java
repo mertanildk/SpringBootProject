@@ -18,7 +18,6 @@ import java.util.Optional;
 public class RoomServiceImp extends BaseServiceImp<Room, Room, RoomRepository, Room> implements RoomService {
 
 
-
     @Override
     public Room addRoom(RoomRequestDto roomRequestDto) {
         Room room = new Room();
@@ -36,12 +35,11 @@ public class RoomServiceImp extends BaseServiceImp<Room, Room, RoomRepository, R
 
     @Override
     public List<Room> findByIdList(List<String> idList) {
-        List<Room>roomList = new ArrayList<>();
+        List<Room> roomList = new ArrayList<>();
         for (String id : idList) {
             Optional<Room> optionalRoom = getDao().findById(id);
             optionalRoom.ifPresent(roomList::add);
         }
-
         return roomList;
     }
 }

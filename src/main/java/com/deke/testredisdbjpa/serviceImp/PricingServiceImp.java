@@ -1,13 +1,11 @@
 package com.deke.testredisdbjpa.serviceImp;
 
 import com.deke.testredisdbjpa.dto.request.PricingRequestDto;
-import com.deke.testredisdbjpa.entity.Hotel;
-import com.deke.testredisdbjpa.entity.Period;
 import com.deke.testredisdbjpa.entity.Pricing;
-import com.deke.testredisdbjpa.entity.Room;
 import com.deke.testredisdbjpa.repositories.PricingRepository;
 import com.deke.testredisdbjpa.service.*;
 import com.deke.testredisdbjpa.serviceImp.base.BaseServiceImp;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,12 +36,13 @@ public class PricingServiceImp extends BaseServiceImp<Pricing, Pricing, PricingR
     }
 
     @Override
+    @SneakyThrows
     public Pricing addPricing(PricingRequestDto pricingRequestDto) {
         return getDao().save(Pricing.builder()
-                .hotel(hotelService.findOne(pricingRequestDto.getHotelOid()).get())
-                .room(roomService.findOne(pricingRequestDto.getRoomOid()).get())
-                .period(periodService.findOne(pricingRequestDto.getPeriodOid()).get())
-                .hostelType(hostelTypeService.findOne(pricingRequestDto.getHostelTypeOid()).get())
+                .hotel(hotelService.findOne(pricingRequestDto.getHotelOid()).orElseThrow(() -> new Exception("hotel not found")))
+                .room(roomService.findOne(pricingRequestDto.getRoomOid()).orElse(null))
+                .period(periodService.findOne(pricingRequestDto.getPeriodOid()).orElseThrow(()->new Exception("period not found")))
+                .hostelType(hostelTypeService.findOne(pricingRequestDto.getHostelTypeOid()).orElseThrow(()->new Exception("hotelType not found")))
                 .adultPrice(pricingRequestDto.getAdultPrice())
                 .childPrice(pricingRequestDto.getChildPrice())
                 .moneyType(pricingRequestDto.getMoneyType())
