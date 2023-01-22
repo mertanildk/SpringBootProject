@@ -10,7 +10,7 @@ import java.util.List;
 @Component
 public interface FacilityService extends BaseService<Facility, String> {
 
-
+    String testMethod2(String name);
     List<Facility> saveAllFacilities(List<String> spesifications);
 
 }

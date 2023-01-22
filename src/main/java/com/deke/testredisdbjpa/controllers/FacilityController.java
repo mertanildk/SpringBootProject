@@ -25,4 +25,8 @@ public class FacilityController {
     public ResponseEntity<RestResponseEntity<List<String>>> getAllFacilities(){
         return ResponseEntity.ok(RestResponseEntity.response(facilityService.findAll()));
     }
+    @GetMapping("/test")
+    public void test(){
+        facilityService.testMethod2("deke");
+    }
 }

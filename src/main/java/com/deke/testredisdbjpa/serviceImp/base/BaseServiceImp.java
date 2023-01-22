@@ -4,6 +4,9 @@ import com.deke.testredisdbjpa.entity.baseEntity.BaseEntity;
 import com.deke.testredisdbjpa.repositories.base.BaseRepository;
 import com.deke.testredisdbjpa.service.base.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,8 +18,9 @@ import java.util.Optional;
 
 public abstract class BaseServiceImp<T extends BaseEntity, E, DAO extends BaseRepository<T>, F> implements BaseService<T, String>  {
 
+
     @Autowired
-    private DAO dao;
+    private  DAO dao;
 
 
     @Override

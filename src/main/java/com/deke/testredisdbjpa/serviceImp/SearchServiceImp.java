@@ -1,12 +1,13 @@
 package com.deke.testredisdbjpa.serviceImp;
 
 import com.deke.testredisdbjpa.dto.request.SearchRequestDto;
-import com.deke.testredisdbjpa.service.HotelService;
 import com.deke.testredisdbjpa.service.PricingService;
 import com.deke.testredisdbjpa.service.SearchService;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+
 import java.util.stream.StreamSupport;
 
 
@@ -20,7 +21,6 @@ public class SearchServiceImp implements SearchService {
 
     @Override
     public Object searchByCityEntryDayEndDateAndGuest(SearchRequestDto searchRequestDto) {
-
         return StreamSupport.stream(pricingService.findAll().spliterator(), false)
                 .filter(pricing ->
                         pricing.getHotel().getHotelAddress().contains(searchRequestDto.getCity()) &&

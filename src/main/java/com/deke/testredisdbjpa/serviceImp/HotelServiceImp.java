@@ -36,5 +36,11 @@ public class HotelServiceImp extends BaseServiceImp<Hotel, Hotel, HotelRepositor
                 .build();
         getDao().save(hotel);
         return hotel;
-    }
+   }
 }
+/*
+public void test(String hotelName) {
+        Predicate<? super Hotel> predicate = hotel -> hotel.getHotelName().equals(hotelName);
+        Stream<Hotel> hotelStream = getDao().findAll().stream().filter(predicate);
+    }
+ */
