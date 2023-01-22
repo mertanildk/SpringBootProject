@@ -1,9 +1,11 @@
 package com.deke.testredisdbjpa.entity;
 
 
+import com.deke.testredisdbjpa.constants.QueryConstants;
 import com.deke.testredisdbjpa.entity.baseEntity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Where;
 
 import java.util.List;
 
@@ -12,6 +14,7 @@ import java.util.List;
 @Builder @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Where(clause = QueryConstants.GENERAL_WHERE_CLAUSE)
 public class Hotel extends BaseEntity {
 
     @Column(name = "hotel_name")
