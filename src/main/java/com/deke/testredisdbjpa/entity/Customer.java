@@ -14,8 +14,8 @@ import org.hibernate.annotations.Where;
 @Where(clause = QueryConstants.GENERAL_WHERE_CLAUSE)
 public class Customer extends BaseEntity {
     private String name;
-    private String surname;
     private String email;
+    private String phone;
 }
 
 //müşteriye oda kiralanacak ve oda kiralama bilgileri tutulacak
