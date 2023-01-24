@@ -14,6 +14,5 @@ public class CreateHotelRequestDto {
     private String hotelPhone;
     private String hotelEmail;
     private int star;
-    private List<String> roomIds;
 
 }

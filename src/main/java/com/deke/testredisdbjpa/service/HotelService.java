@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component;
 @Component
 public interface HotelService extends BaseService<Hotel, String> {
 
-
+    boolean deleteHotel(String id);
     Hotel addHotel(CreateHotelRequestDto createHotelRequestDto);
 }

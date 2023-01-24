@@ -21,8 +21,10 @@ public class HotelServiceImp extends BaseServiceImp<Hotel, Hotel, HotelRepositor
     private HostelTypeService hostelTypeService;
 
     @CacheEvict(value = "hotel", key = "#id")
-    public void deleteHotel(String id) {
+    @Override
+    public boolean deleteHotel(String id) {
         getDao().deleteById(id);
+        return findOne(id).isEmpty();
     }
 
     @Override
