@@ -1,4 +1,4 @@
-package com.deke.testredisdbjpa.config;
+package com.deke.testredisdbjpa.configs.cache;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.EnableCaching;

@@ -10,5 +10,8 @@ import org.springframework.stereotype.Component;
 public interface HotelService extends BaseService<Hotel, String> {
 
     boolean deleteHotel(String id);
+
     Hotel addHotel(CreateHotelRequestDto createHotelRequestDto);
+
+    CreateHotelRequestDto getHotelDTO(String id);
 }

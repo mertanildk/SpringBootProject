@@ -9,7 +9,7 @@ import org.hibernate.annotations.Where;
 
 @Builder
 @Getter @Setter @Entity
-@Table(name = "pricing")
+@Table(name = "hotel_pricing")
 @AllArgsConstructor
 @NoArgsConstructor
 @Where(clause = QueryConstants.GENERAL_WHERE_CLAUSE)

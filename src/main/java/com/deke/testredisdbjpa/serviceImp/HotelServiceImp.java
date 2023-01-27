@@ -7,18 +7,23 @@ import com.deke.testredisdbjpa.service.HostelTypeService;
 import com.deke.testredisdbjpa.service.HotelService;
 import com.deke.testredisdbjpa.service.RoomService;
 import com.deke.testredisdbjpa.serviceImp.base.BaseServiceImp;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.modelmapper.ModelMapper;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 
 @Service("hotelService")
 public class HotelServiceImp extends BaseServiceImp<Hotel, Hotel, HotelRepository, Hotel> implements HotelService {
-    @Autowired
-    private RoomService roomService;
 
-    @Autowired
-    private HostelTypeService hostelTypeService;
+    private final RoomService roomService;
+    private final HostelTypeService hostelTypeService;
+    private final ModelMapper modelMapper;
+
+    public HotelServiceImp(RoomService roomService, HostelTypeService hostelTypeService, ModelMapper modelMapper) {
+        this.roomService = roomService;
+        this.hostelTypeService = hostelTypeService;
+        this.modelMapper = modelMapper;
+    }
 
     @CacheEvict(value = "hotel", key = "#id")
     @Override
@@ -29,20 +34,11 @@ public class HotelServiceImp extends BaseServiceImp<Hotel, Hotel, HotelRepositor
 
     @Override
     public Hotel addHotel(CreateHotelRequestDto createHotelRequestDto) {
-        Hotel hotel = Hotel.builder()
-                .hotelAddress(createHotelRequestDto.getHotelAddress())
-                .hotelName(createHotelRequestDto.getHotelName())
-                .hotelPhone(createHotelRequestDto.getHotelPhone())
-                .hotelEmail(createHotelRequestDto.getHotelEmail())
-                .star(createHotelRequestDto.getStar())
-                .build();
-        getDao().save(hotel);
-        return hotel;
-   }
-}
-/*
-public void test(String hotelName) {
-        Predicate<? super Hotel> predicate = hotel -> hotel.getHotelName().equals(hotelName);
-        Stream<Hotel> hotelStream = getDao().findAll().stream().filter(predicate);
+        Hotel hotel = modelMapper.map(createHotelRequestDto, Hotel.class);
+        return getDao().save(hotel);
     }
- */
+    @Override
+    public CreateHotelRequestDto getHotelDTO(String id) {
+        return modelMapper.map(findOne(id).orElse(null), CreateHotelRequestDto.class);
+    }
+}

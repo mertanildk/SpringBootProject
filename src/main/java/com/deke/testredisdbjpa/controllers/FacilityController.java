@@ -1,6 +1,7 @@
 package com.deke.testredisdbjpa.controllers;
 
 
+import com.deke.testredisdbjpa.dto.request.FacilityRequestDto;
 import com.deke.testredisdbjpa.entity.Facility;
 import com.deke.testredisdbjpa.responseApi.RestResponseEntity;
 import com.deke.testredisdbjpa.service.FacilityService;
@@ -18,15 +19,17 @@ public class FacilityController {
     private FacilityService facilityService;
 
     @PostMapping("/create-facilities")
-    public ResponseEntity<RestResponseEntity<List<Facility>>> createFacilities(@RequestBody List<String> spesifications){
-        return ResponseEntity.ok(RestResponseEntity.response(facilityService.saveAllFacilities(spesifications)));
+    public ResponseEntity<RestResponseEntity<List<Facility>>> createFacilities(@RequestBody List<FacilityRequestDto> facilityRequestDtos) {
+        return ResponseEntity.ok(RestResponseEntity.response(facilityService.saveAllFacilities(facilityRequestDtos)));
     }
+
     @GetMapping("/get-all-facilities")
-    public ResponseEntity<RestResponseEntity<List<String>>> getAllFacilities(){
+    public ResponseEntity<RestResponseEntity<List<String>>> getAllFacilities() {
         return ResponseEntity.ok(RestResponseEntity.response(facilityService.findAll()));
     }
+
     @GetMapping("/test")
-    public void test(){
+    public void test() {
         facilityService.testMethod2("deke");
     }
 }

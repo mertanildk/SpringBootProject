@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.URI;
 
 @org.springframework.web.bind.annotation.RestController
@@ -26,18 +28,24 @@ public class RestController {
         return ResponseEntity.ok(testRestTemplateService.getRecentUSD());
     }
 
+    @GetMapping("/testttt")
+    public BigDecimal testooo() {
+        return BigDecimal.valueOf(934.88).divide(BigDecimal.valueOf(2), 2, RoundingMode.HALF_UP).multiply(BigDecimal.valueOf(5));
+    }
+
     @PostMapping("/test2")//attığın istekten geriye dönüşte url değiştirme
     public ResponseEntity<USD> test() {
-        USD usd = new USD("USD", "asd","asdasd","asdsad","asdsd");
+        USD usd = new USD("USD", "asd", "asdasd", "asdsad", "asdsd");
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{satis}")
                 .buildAndExpand(usd.getSatis())
                 .toUri();
         return ResponseEntity.created(uri).build();
     }
+
     @GetMapping("/test2/{satis}")
     public String test2(@PathVariable String satis) {
-        return "buraya geldin "+satis;
+        return "buraya geldin " + satis;
     }
 
 }
