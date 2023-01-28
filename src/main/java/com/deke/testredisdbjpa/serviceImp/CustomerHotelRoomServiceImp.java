@@ -5,12 +5,13 @@ import com.deke.testredisdbjpa.entity.Customer;
 import com.deke.testredisdbjpa.entity.CustomerHotelRoom;
 import com.deke.testredisdbjpa.entity.HotelRoom;
 import com.deke.testredisdbjpa.entity.Pricing;
+import com.deke.testredisdbjpa.exceptions.RestRuntimeException;
 import com.deke.testredisdbjpa.repositories.CustomerHotelRoomRepository;
 import com.deke.testredisdbjpa.service.*;
 import com.deke.testredisdbjpa.serviceImp.base.BaseServiceImp;
-import com.deke.testredisdbjpa.testRest.RestController;
 import com.deke.testredisdbjpa.testRest.TestRestTemplateService;
 import lombok.SneakyThrows;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
@@ -24,27 +25,25 @@ public class CustomerHotelRoomServiceImp extends BaseServiceImp<CustomerHotelRoo
     private final HotelRoomService hotelRoomService;
     private final PricingService pricingService;
     private final TestRestTemplateService testRestTemplateService;
+    private final ModelMapper modelMapper;
 
-    public CustomerHotelRoomServiceImp(CustomerService customerService, HotelRoomService hotelRoomService, PricingService pricingService, TestRestTemplateService testRestTemplateService) {
+    public CustomerHotelRoomServiceImp(CustomerService customerService, HotelRoomService hotelRoomService, PricingService pricingService, TestRestTemplateService testRestTemplateService, ModelMapper modelMapper) {
         this.customerService = customerService;
         this.hotelRoomService = hotelRoomService;
         this.pricingService = pricingService;
         this.testRestTemplateService = testRestTemplateService;
+        this.modelMapper = modelMapper;
     }
 
     @Override
     @SneakyThrows
     public CustomerHotelRoom rentARoom(CustomerHotelRoomRequestDto hotelRoomRequestDto) {
-        Customer customer = new Customer();
-        customer.setEmail(hotelRoomRequestDto.getEmail());
-        customer.setName(hotelRoomRequestDto.getName());
-        customer.setPhone(hotelRoomRequestDto.getPhone());
+        Customer customer = modelMapper.map(hotelRoomRequestDto.getCustomerRequestDto(), Customer.class);
         customerService.save(customer);
-        CustomerHotelRoom customerHotelRoom = new CustomerHotelRoom();
+        CustomerHotelRoom customerHotelRoom = modelMapper.map(hotelRoomRequestDto, CustomerHotelRoom.class);
         customerHotelRoom.setCustomer(customer);
-        customerHotelRoom.setHotelRoom(hotelRoomService.findOne(hotelRoomRequestDto.getHotelRoomId()).stream().findFirst().orElse(null));
-        customerHotelRoom.setExitDate(hotelRoomRequestDto.getExitDate());
-        customerHotelRoom.setEntryDate(hotelRoomRequestDto.getEntryDate());
+        customerHotelRoom.setHotelRoom(hotelRoomService.findOne(hotelRoomRequestDto.getHotelRoomId()).
+                stream().findFirst().orElseThrow(() -> new RestRuntimeException("HotelRoom not found","001")));
         return save(customerHotelRoom);
     }
 

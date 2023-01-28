@@ -8,9 +8,7 @@ import java.util.Date;
 
 @Getter
 public class CustomerHotelRoomRequestDto {
-    private String name;
-    private String email;
-    private String phone;
+    private CustomerRequestDto customerRequestDto;
     private String hotelRoomId;
     private Date entryDate;
     private Date exitDate;
