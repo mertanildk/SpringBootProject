@@ -1,15 +1,20 @@
 package com.deke.testredisdbjpa.exceptions;
 
 
+import com.deke.testredisdbjpa.dto.request.MailDto;
+import com.deke.testredisdbjpa.test.EmailServiceImp;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/api")
 public class TestController {
+
+    @Autowired
+    private EmailServiceImp emailServiceImp;
 
     @GetMapping(path = "/test")
     public ResponseEntity<String> test() {
@@ -29,5 +34,17 @@ public class TestController {
     @GetMapping(path = "/test61")
     public MethodArgumentNotValidException test242() {
         return new MethodArgumentNotValidException(null,null);
+    }
+
+    @PostMapping(path = "/test3")
+    public TestEntity test3(@Valid @RequestBody TestEntity testEntity) {
+
+        return new TestEntity(testEntity.getId(), testEntity.getName(),testEntity.getAge());
+    }
+
+    @GetMapping("/testMail")
+    public boolean testMail(@RequestBody MailDto mailDto){
+        emailServiceImp.sendEmail(mailDto);
+        return true;
     }
 }

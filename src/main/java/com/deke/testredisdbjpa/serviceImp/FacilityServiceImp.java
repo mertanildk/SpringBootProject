@@ -31,23 +31,11 @@ public class FacilityServiceImp extends BaseServiceImp<Facility, Facility, Facil
         return getDao().findAll();
     }
 
+
+
     /*
-    @Override
-    public List<Facility> saveAllFacilities(List<String> spesifications) {
-        List<Facility> facilities = modelMapper.map(spesifications, new ArrayList<Facility>().getClass());
-        spesifications.stream().map(s -> modelMapper.map(s, Facility.class)).forEach(facilityRepository::save);
-        spesifications.forEach(spesification -> {
-            Facility facility = new Facility();
-            facility.setSpecifications(spesification);
-            facilities.add(facility);
-        });
-        facilityRepository.saveAll(facilities);
-        return facilities;
-    }
+    Aop Testini Bu Methodda Yapıyorum @Before After Gibi Methodlar Çalışıyor Silme
      */
-
-
-    @SneakyThrows
     @Override
     public String testMethod2(String name){
         return "testMethod2";

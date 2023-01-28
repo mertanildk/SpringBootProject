@@ -13,6 +13,11 @@ public class BaseException extends RuntimeException {
     private String message;
     private String code;
 
+    public BaseException(String code) {
+        this.code = code;
+    }
+
+
     @Override
     public String getMessage() {
         return message;

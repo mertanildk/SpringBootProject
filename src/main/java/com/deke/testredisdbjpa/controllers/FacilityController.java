@@ -28,6 +28,10 @@ public class FacilityController {
         return ResponseEntity.ok(RestResponseEntity.response(facilityService.findAll()));
     }
 
+
+    /*
+    Aop Testini Bu Methodda Yapıyorum @Before After Gibi Methodlar Çalışıyor Silme
+     */
     @GetMapping("/test")
     public void test() {
         facilityService.testMethod2("deke");

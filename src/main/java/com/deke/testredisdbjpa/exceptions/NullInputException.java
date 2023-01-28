@@ -20,9 +20,4 @@ public class NullInputException extends BaseException {
     public NullInputException() {
         super();
     }
-
-    @Override
-    public void setMessage(String message) {
-        super.setMessage(message);
-    }
 }
