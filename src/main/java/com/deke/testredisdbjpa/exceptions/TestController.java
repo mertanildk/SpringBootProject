@@ -2,6 +2,7 @@ package com.deke.testredisdbjpa.exceptions;
 
 
 import com.deke.testredisdbjpa.dto.request.MailDto;
+import com.deke.testredisdbjpa.mernis.EURKPSPublicSoap;
 import com.deke.testredisdbjpa.test.EmailServiceImp;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,15 @@ public class TestController {
     public boolean testMail(@RequestBody MailDto mailDto){
         emailServiceImp.sendEmail(mailDto);
         return true;
+    }
+
+    @PostMapping("/testMernis")
+    public ResponseEntity<String> testMernis(@RequestParam String identityNo) throws Exception {
+        EURKPSPublicSoap client = new EURKPSPublicSoap();
+        boolean isRealPerson = client.TCKimlikNoDogrula(Long.parseLong(identityNo),"Mert Anıl","Deke",1998);
+        if (!isRealPerson){
+            throw new RuntimeException("Girilen bilgilere ait kişi bulunamadı");
+        }
+        return ResponseEntity.ok("Girilen bilgilere ait kişi bulundu.");
     }
 }

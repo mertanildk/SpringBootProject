@@ -15,7 +15,6 @@ public class RuntimeErrorDto implements Serializable {
             this.code = code;
             this.message = message;
         }
-
         private Boolean success = false;
         private String code;
         private String message;
