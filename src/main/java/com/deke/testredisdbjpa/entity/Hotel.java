@@ -7,8 +7,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Where;
 
-import java.util.List;
-
 @Table(name = "hotels")
 @Entity
 @Builder @Getter

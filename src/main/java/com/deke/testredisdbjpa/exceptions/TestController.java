@@ -5,7 +5,7 @@ import com.deke.testredisdbjpa.dto.request.MailDto;
 import com.deke.testredisdbjpa.mernis.EURKPSPublicSoap;
 import com.deke.testredisdbjpa.test.EmailServiceImp;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.EventListener;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "/api")
 public class TestController {
 
-    @Autowired
     private EmailServiceImp emailServiceImp;
+
+    public TestController(EmailServiceImp emailServiceImp) {
+        this.emailServiceImp = emailServiceImp;
+    }
 
     @GetMapping(path = "/test")
     public ResponseEntity<String> test() {
@@ -48,11 +51,10 @@ public class TestController {
         emailServiceImp.sendEmail(mailDto);
         return true;
     }
-
     @PostMapping("/testMernis")
     public ResponseEntity<String> testMernis(@RequestParam String identityNo) throws Exception {
         EURKPSPublicSoap client = new EURKPSPublicSoap();
-        boolean isRealPerson = client.TCKimlikNoDogrula(Long.parseLong(identityNo),"Mert Anıl","Deke",1998);
+        boolean isRealPerson = client.TCKimlikNoDogrula(Long.parseLong(identityNo),"Şevval","Kesen",1998);
         if (!isRealPerson){
             throw new RuntimeException("Girilen bilgilere ait kişi bulunamadı");
         }

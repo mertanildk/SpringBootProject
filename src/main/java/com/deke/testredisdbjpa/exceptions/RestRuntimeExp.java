@@ -44,16 +44,7 @@ public class RestRuntimeExp extends ResponseEntityExceptionHandler {
         RuntimeErrorDto runtimeErrorDto = new RuntimeErrorDto("0001", "You are using a wrong http method");
         return new ResponseEntity<>(runtimeErrorDto, httpHeaders, HttpStatus.BAD_REQUEST);
     }
-    @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-        List<String> errors = new ArrayList<>();
-        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
-            errors.add(error.getField() + ": " + error.getDefaultMessage());
-        }
-        for (ObjectError error : ex.getBindingResult().getGlobalErrors()) {
-            errors.add(error.getObjectName() + ": " + error.getDefaultMessage());
-        }
-        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
-    }
+
+
 }
 //RestResponseEntity.response(hotelService.findOne(id)
