@@ -5,7 +5,6 @@ import com.deke.testredisdbjpa.dto.request.FacilityRequestDto;
 import com.deke.testredisdbjpa.entity.Facility;
 import com.deke.testredisdbjpa.responseApi.RestResponseEntity;
 import com.deke.testredisdbjpa.service.FacilityService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +14,12 @@ import java.util.List;
 @RequestMapping(path = "/facility")
 public class FacilityController {
 
-    @Autowired
-    private FacilityService facilityService;
+
+    private final FacilityService facilityService;
+
+    public FacilityController(FacilityService facilityService) {
+        this.facilityService = facilityService;
+    }
 
     @PostMapping("/create-facilities")
     public ResponseEntity<RestResponseEntity<List<Facility>>> createFacilities(@RequestBody List<FacilityRequestDto> facilityRequestDtos) {
