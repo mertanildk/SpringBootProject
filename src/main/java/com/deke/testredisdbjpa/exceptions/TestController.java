@@ -35,10 +35,7 @@ public class TestController {
         return null;
     }
 
-    @GetMapping(path = "/test61")
-    public MethodArgumentNotValidException test242() {
-        return new MethodArgumentNotValidException(null,null);
-    }
+
 
     @PostMapping(path = "/test3")
     public TestEntity test3(@Valid @RequestBody TestEntity testEntity) {
@@ -54,10 +51,11 @@ public class TestController {
     @PostMapping("/testMernis")
     public ResponseEntity<String> testMernis(@RequestParam String identityNo) throws Exception {
         EURKPSPublicSoap client = new EURKPSPublicSoap();
-        boolean isRealPerson = client.TCKimlikNoDogrula(Long.parseLong(identityNo),"Şevval","Kesen",1998);
+        boolean isRealPerson = client.TCKimlikNoDogrula(Long.parseLong(identityNo),"Mert Anıl","Deke",1998);
         if (!isRealPerson){
             throw new RuntimeException("Girilen bilgilere ait kişi bulunamadı");
         }
         return ResponseEntity.ok("Girilen bilgilere ait kişi bulundu.");
     }
+
 }

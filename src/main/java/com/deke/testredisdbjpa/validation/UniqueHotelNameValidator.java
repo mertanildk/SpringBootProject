@@ -17,7 +17,6 @@ public class UniqueHotelNameValidator implements ConstraintValidator<UniqueHotel
 
     @Override
     public boolean isValid(String hotelName, ConstraintValidatorContext constraintValidatorContext) {
-        List<Hotel> hotels = hotelRepository.getAllByHotelName(hotelName);
-        return hotels.isEmpty();
+        return hotelRepository.findAll().stream().noneMatch(hotel -> hotel.getHotelName().equals(hotelName));
     }
 }

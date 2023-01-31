@@ -1,36 +1,27 @@
 package com.deke.testredisdbjpa.validation;
 
 
-import com.deke.testredisdbjpa.dto.view.RuntimeErrorDto;
-import org.springframework.http.*;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-@RestControllerAdvice
-public class ValidationHandler {
+@ControllerAdvice
+public class ValidationHandler extends ResponseEntityExceptionHandler {
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleInvalidArgument(MethodArgumentNotValidException ex) {
-        Map<String, String> errorMap = new HashMap();
-        ex.getBindingResult().getFieldErrors().forEach(error -> {
-            errorMap.put(error.getField(), error.getDefaultMessage());
-        });
-        return errorMap;
-    }
 
-}
-/*
-@Override
+    @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid
             (MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 
@@ -41,7 +32,8 @@ public class ValidationHandler {
         for (ObjectError error : ex.getBindingResult().getGlobalErrors()) {
             errors.add(error.getObjectName() + ": " + error.getDefaultMessage());
         }
-        errors.forEach(System.out::println);
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
 
-    } */
+
+}

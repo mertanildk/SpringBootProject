@@ -6,18 +6,18 @@ import com.deke.testredisdbjpa.dto.response.HotelResponseDto;
 import com.deke.testredisdbjpa.responseApi.RestResponseEntity;
 import com.deke.testredisdbjpa.service.HotelService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 @RequestMapping(path = "/hotel")
+@AllArgsConstructor
 public class HotelController {
 
-    @Autowired
-    HotelService hotelService;
+    private final HotelService hotelService;
 
     @PostMapping(path = "/create-hotel")
     public ResponseEntity<RestResponseEntity<HotelResponseDto>> createHotel(@RequestBody @Valid CreateHotelRequestDto createHotelRequestDto) {

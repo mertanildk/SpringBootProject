@@ -9,7 +9,8 @@ import org.hibernate.annotations.Where;
 
 @Table(name = "hotels")
 @Entity
-@Builder @Getter
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Where(clause = QueryConstants.GENERAL_WHERE_CLAUSE)

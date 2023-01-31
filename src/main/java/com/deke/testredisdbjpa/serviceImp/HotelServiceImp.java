@@ -18,11 +18,14 @@ public class HotelServiceImp extends BaseServiceImp<Hotel, Hotel, HotelRepositor
     private final RoomService roomService;
     private final HostelTypeService hostelTypeService;
     private final ModelMapper modelMapper;
+    private final HotelRepository hotelRepository;
 
-    public HotelServiceImp(RoomService roomService, HostelTypeService hostelTypeService, ModelMapper modelMapper) {
+    public HotelServiceImp(RoomService roomService, HostelTypeService hostelTypeService, ModelMapper modelMapper,
+                           HotelRepository hotelRepository) {
         this.roomService = roomService;
         this.hostelTypeService = hostelTypeService;
         this.modelMapper = modelMapper;
+        this.hotelRepository = hotelRepository;
     }
 
     @CacheEvict(value = "hotel", key = "#id")
@@ -35,8 +38,9 @@ public class HotelServiceImp extends BaseServiceImp<Hotel, Hotel, HotelRepositor
     @Override
     public Hotel addHotel(CreateHotelRequestDto createHotelRequestDto) {
         Hotel hotel = modelMapper.map(createHotelRequestDto, Hotel.class);
-        return getDao().save(hotel);
+        return hotelRepository.save(hotel);
     }
+
     @Override
     public CreateHotelRequestDto getHotelDTO(String id) {
         return modelMapper.map(findOne(id).orElse(null), CreateHotelRequestDto.class);
