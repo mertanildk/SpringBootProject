@@ -13,5 +13,6 @@ public interface FacilityService extends BaseService<Facility, String> {
 
     String testMethod2(String name);
     List<Facility> saveAllFacilities(List<FacilityRequestDto> facilityRequestDtos);
+    Facility deleteById(String id);
 
 }

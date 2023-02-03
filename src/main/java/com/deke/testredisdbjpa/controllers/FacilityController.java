@@ -25,6 +25,11 @@ public class FacilityController {
     public ResponseEntity<RestResponseEntity<List<Facility>>> createFacilities(@RequestBody List<FacilityRequestDto> facilityRequestDtos) {
         return ResponseEntity.ok(RestResponseEntity.response(facilityService.saveAllFacilities(facilityRequestDtos)));
     }
+    @DeleteMapping("/delete-facility/{id}")
+    public ResponseEntity<RestResponseEntity<Boolean>> deleteFacility(@PathVariable String id) {
+        return ResponseEntity.ok(RestResponseEntity.response(facilityService.deleteById(id)));
+    }
+
 
     @GetMapping("/get-all-facilities")
     public ResponseEntity<RestResponseEntity<List<String>>> getAllFacilities() {

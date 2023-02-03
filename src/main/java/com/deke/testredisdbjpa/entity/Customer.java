@@ -16,6 +16,7 @@ public class Customer extends BaseEntity {
     private String name;
     private String email;
     private String phone;
+    private String password;
 }
 
 //müşteriye oda kiralanacak ve oda kiralama bilgileri tutulacak
