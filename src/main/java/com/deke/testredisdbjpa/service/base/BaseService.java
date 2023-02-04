@@ -16,6 +16,8 @@ public interface BaseService<T extends BaseEntity, PK extends Serializable> {
 
         T update(T t) throws InstantiationException, InvocationTargetException;
 
+        T getOne(String id);
+
         void delete(T t);
 
         Iterable<T> insert(Iterable<T> iterable);

@@ -1,12 +1,10 @@
 package com.deke.testredisdbjpa.serviceImp.base;
 
 import com.deke.testredisdbjpa.entity.baseEntity.BaseEntity;
+import com.deke.testredisdbjpa.exceptions.NonMatchedAnyEntityException;
 import com.deke.testredisdbjpa.repositories.base.BaseRepository;
 import com.deke.testredisdbjpa.service.base.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +15,7 @@ import java.util.Optional;
 
 
 public abstract class BaseServiceImp<T extends BaseEntity, E, DAO extends BaseRepository<T>, F> implements BaseService<T, String>  {
+
 
 
     @Autowired
@@ -84,6 +83,12 @@ public abstract class BaseServiceImp<T extends BaseEntity, E, DAO extends BaseRe
     public Optional<T> findOne(String id) {
         return dao.findById(id);
     }
+
+    @Override
+    public T getOne(String id) {
+        return dao.findById(id).orElseThrow((()-> new NonMatchedAnyEntityException(this.getClass().getSimpleName().substring(0,this.getClass().getSimpleName().lastIndexOf("S")), id)));
+    }
+
     @Override
     public List<T> getList(){
         return dao.findAll();

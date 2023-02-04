@@ -6,10 +6,8 @@ import com.deke.testredisdbjpa.responseApi.RestResponseEntity;
 import com.deke.testredisdbjpa.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping("/customer")
@@ -21,6 +19,10 @@ public class CustomerController {
     @PostMapping("/add")
     public ResponseEntity<RestResponseEntity<Customer>> addCustomer(@RequestBody CustomerRequestDto customer){
         return ResponseEntity.ok(RestResponseEntity.response(customerService.addCustomer(customer)));
+    }
+    @GetMapping("/get/{id}")
+    public ResponseEntity<RestResponseEntity<Customer>> getCustomer(@PathVariable String id){
+        return ResponseEntity.ok(RestResponseEntity.response(customerService.getOne(id)));
     }
 
 }
