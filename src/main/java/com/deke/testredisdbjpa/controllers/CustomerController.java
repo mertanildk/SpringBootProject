@@ -4,7 +4,10 @@ import com.deke.testredisdbjpa.dto.request.CustomerRequestDto;
 import com.deke.testredisdbjpa.entity.Customer;
 import com.deke.testredisdbjpa.responseApi.RestResponseEntity;
 import com.deke.testredisdbjpa.service.CustomerService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +20,7 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @PostMapping("/add")
-    public ResponseEntity<RestResponseEntity<Customer>> addCustomer(@RequestBody CustomerRequestDto customer){
+    public ResponseEntity<RestResponseEntity<Customer>> addCustomer(@RequestBody @Valid CustomerRequestDto customer){
         return ResponseEntity.ok(RestResponseEntity.response(customerService.addCustomer(customer)));
     }
     @GetMapping("/get/{id}")

@@ -10,12 +10,12 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = {UniqueHotelNameValidator.class})
+@Constraint(validatedBy = {UniqueNameValidator.class})
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface UniqueHotelName {
+public @interface UniqueNameValid {
 
-    String message() default ValidationMessages.UNIQUE_HOTEL_NAME;
+    String message() default ValidationMessages.UNIQUE_NAME;
 
     Class<?>[] groups() default {};
 

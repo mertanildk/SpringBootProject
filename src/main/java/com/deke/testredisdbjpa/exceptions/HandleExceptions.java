@@ -3,13 +3,20 @@ package com.deke.testredisdbjpa.exceptions;
 
 import com.deke.testredisdbjpa.cons.ExceptionMessages;
 import com.deke.testredisdbjpa.dto.view.RuntimeErrorDto;
+import lombok.NonNull;
 import org.springframework.http.*;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @ControllerAdvice
 public class HandleExceptions extends ResponseEntityExceptionHandler {
@@ -22,6 +29,7 @@ public class HandleExceptions extends ResponseEntityExceptionHandler {
         RuntimeErrorDto runtimeErrorDto = new RuntimeErrorDto(restRuntimeException.getCode(), restRuntimeException.getMessage());
         return new ResponseEntity<>(runtimeErrorDto, httpHeaders, HttpStatus.BAD_REQUEST);
     }
+
     @ExceptionHandler(NullInputException.class)
     @ResponseBody
     public ResponseEntity<RuntimeErrorDto> handleNullInputException(NullInputException nullInputException) {
@@ -33,24 +41,37 @@ public class HandleExceptions extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NonMatchedAnyEntityException.class)
     @ResponseBody
-    public ResponseEntity<RuntimeErrorDto> handleNonMatchedAnyEntityException(NonMatchedAnyEntityException nullInputException){
+    public ResponseEntity<RuntimeErrorDto> handleNonMatchedAnyEntityException(NonMatchedAnyEntityException nullInputException) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         RuntimeErrorDto runtimeErrorDto =
                 new RuntimeErrorDto(nullInputException.getCode(), nullInputException.getMessage(), nullInputException.getClassName());
-        return new ResponseEntity<>(runtimeErrorDto,httpHeaders, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(runtimeErrorDto, httpHeaders, HttpStatus.BAD_REQUEST);
     }
 
     @Override
     @ResponseBody
-
-    protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+    protected ResponseEntity<Object> handleHttpRequestMethodNotSupported
+            (@NonNull HttpRequestMethodNotSupportedException ex, @NonNull HttpHeaders headers, @NonNull HttpStatusCode status, @NonNull WebRequest request) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         RuntimeErrorDto runtimeErrorDto = new RuntimeErrorDto("0001", ExceptionMessages.HTTP_REQUEST_WRONG_METHOD);
         return new ResponseEntity<>(runtimeErrorDto, httpHeaders, HttpStatus.BAD_REQUEST);
     }
 
+    @Override//validation
+    protected ResponseEntity<Object> handleMethodArgumentNotValid
+            (MethodArgumentNotValidException ex, @NonNull HttpHeaders headers, @NonNull HttpStatusCode status, @NonNull WebRequest request) {
+
+        List<String> errors = new ArrayList<>();
+        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
+            errors.add(error.getField() + ": " + error.getDefaultMessage());
+        }
+        for (ObjectError error : ex.getBindingResult().getGlobalErrors()) {
+            errors.add(error.getObjectName() + ": " + error.getDefaultMessage());
+        }
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+
 
 }
-//RestResponseEntity.response(hotelService.findOne(id)
