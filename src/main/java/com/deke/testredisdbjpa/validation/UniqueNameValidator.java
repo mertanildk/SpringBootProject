@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 
 
 @RequiredArgsConstructor
-public class UniqueNameValidator implements ConstraintValidator<UniqueNameValid,String> {
+public class UniqueNameValidator implements ConstraintValidator<UniqueCustomerName,String> {
 
     private final CustomerRepository customerRepository;
 

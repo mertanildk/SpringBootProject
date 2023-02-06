@@ -5,6 +5,7 @@ import com.deke.testredisdbjpa.entity.Customer;
 import com.deke.testredisdbjpa.repositories.CustomerRepository;
 import com.deke.testredisdbjpa.service.CustomerService;
 import com.deke.testredisdbjpa.serviceImp.base.BaseServiceImp;
+import com.deke.testredisdbjpa.utils.HashingUtil;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
@@ -20,7 +21,7 @@ public class CustomerServiceImp extends BaseServiceImp<Customer,Customer, Custom
     public Customer addCustomer(CustomerRequestDto customerRequestDto) {
 
         Customer customer = modelMapper.map(customerRequestDto, Customer.class);
-        customer.setPassword(encoder.encode(customerRequestDto.getPassword()));
+        customer.setPassword(HashingUtil.hashSHA2(customerRequestDto.getPassword()));
         return insert(customer);
     }
 }

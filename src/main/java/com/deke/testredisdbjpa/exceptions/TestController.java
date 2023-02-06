@@ -92,15 +92,7 @@ public class TestController {
 
     }
 
-    @GetMapping("/testJsonProperties")
-    public ResponseEntity<TestClas> testJsonProperties() {
 
-        return ResponseEntity.ok(new TestClas());
-    }
 
-    class TestClas {
-        @JsonProperty("user_test")//json response döndürürken bu şekilde gösterir
-        private String name;
-    }
 
 }

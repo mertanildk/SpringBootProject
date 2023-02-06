@@ -1,7 +1,7 @@
 package com.deke.testredisdbjpa.validation;
 
 
-import com.deke.testredisdbjpa.cons.ValidationMessages;
+import com.deke.testredisdbjpa.constants.messageConstants.ValidationMessages;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = {UniqueNameValidator.class})
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface UniqueNameValid {
+public @interface UniqueCustomerName {
 
     String message() default ValidationMessages.UNIQUE_NAME;
 

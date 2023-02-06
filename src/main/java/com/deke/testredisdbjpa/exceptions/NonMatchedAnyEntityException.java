@@ -1,10 +1,8 @@
 package com.deke.testredisdbjpa.exceptions;
 
-import com.deke.testredisdbjpa.cons.ExceptionMessages;
+import com.deke.testredisdbjpa.constants.messageConstants.ExceptionMessages;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 

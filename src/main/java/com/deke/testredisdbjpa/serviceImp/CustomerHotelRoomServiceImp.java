@@ -7,9 +7,12 @@ import com.deke.testredisdbjpa.entity.HotelRoom;
 import com.deke.testredisdbjpa.entity.Pricing;
 import com.deke.testredisdbjpa.exceptions.RestRuntimeException;
 import com.deke.testredisdbjpa.repositories.CustomerHotelRoomRepository;
-import com.deke.testredisdbjpa.service.*;
+import com.deke.testredisdbjpa.service.CustomerHotelRoomService;
+import com.deke.testredisdbjpa.service.CustomerService;
+import com.deke.testredisdbjpa.service.HotelRoomService;
+import com.deke.testredisdbjpa.service.PricingService;
 import com.deke.testredisdbjpa.serviceImp.base.BaseServiceImp;
-import com.deke.testredisdbjpa.testRest.TestRestTemplateService;
+import com.deke.testredisdbjpa.utils.ExternalApiUtil;
 import lombok.SneakyThrows;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.util.Streamable;
@@ -24,14 +27,14 @@ public class CustomerHotelRoomServiceImp extends BaseServiceImp<CustomerHotelRoo
     private final CustomerService customerService;
     private final HotelRoomService hotelRoomService;
     private final PricingService pricingService;
-    private final TestRestTemplateService testRestTemplateService;
     private final ModelMapper modelMapper;
 
-    public CustomerHotelRoomServiceImp(CustomerService customerService, HotelRoomService hotelRoomService, PricingService pricingService, TestRestTemplateService testRestTemplateService, ModelMapper modelMapper) {
+    public CustomerHotelRoomServiceImp
+            (CustomerService customerService, HotelRoomService hotelRoomService,
+             PricingService pricingService, ModelMapper modelMapper) {
         this.customerService = customerService;
         this.hotelRoomService = hotelRoomService;
         this.pricingService = pricingService;
-        this.testRestTemplateService = testRestTemplateService;
         this.modelMapper = modelMapper;
     }
 
@@ -66,7 +69,7 @@ public class CustomerHotelRoomServiceImp extends BaseServiceImp<CustomerHotelRoo
     @SneakyThrows
     public String calculatePrice(String id) {
         Pricing pricing = pricingService.findOne(id).stream().findFirst().orElseThrow(() -> new Exception("Pricing not found"));
-        double usd = Double.parseDouble(Objects.requireNonNull(testRestTemplateService.getRecentUSD().getAlis()));
+        double usd = Double.parseDouble(Objects.requireNonNull(ExternalApiUtil.getRecentUSD().getAlis()));
         return String.format(Objects.equals(pricing.getMoneyType().toLowerCase(), "dolar") ?
                 pricing.getChildPrice() * usd + pricing.getAdultPrice() * usd + " DOLAR" :
                 pricing.getChildPrice() + pricing.getAdultPrice() + " TL");

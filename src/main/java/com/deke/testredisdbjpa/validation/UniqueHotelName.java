@@ -1,7 +1,7 @@
 package com.deke.testredisdbjpa.validation;
 
 
-import com.deke.testredisdbjpa.cons.ValidationMessages;
+import com.deke.testredisdbjpa.constants.messageConstants.ValidationMessages;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 

@@ -1,4 +1,4 @@
-package com.deke.testredisdbjpa.cons;
+package com.deke.testredisdbjpa.constants.messageConstants;
 
 public class ExceptionMessages {
     private ExceptionMessages() {}
