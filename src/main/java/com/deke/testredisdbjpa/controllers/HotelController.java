@@ -2,14 +2,13 @@ package com.deke.testredisdbjpa.controllers;
 
 
 import com.deke.testredisdbjpa.dto.request.CreateHotelRequestDto;
-import com.deke.testredisdbjpa.dto.response.HotelResponseDto;
+import com.deke.testredisdbjpa.dto.search.HotelSearchDto;
 import com.deke.testredisdbjpa.responseApi.RestResponseEntity;
 import com.deke.testredisdbjpa.service.HotelService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -21,17 +20,24 @@ public class HotelController {
     private final HotelService hotelService;
 
     @PostMapping(path = "/create-hotel")
-    public ResponseEntity<RestResponseEntity<HotelResponseDto>> createHotel(@RequestBody @Valid CreateHotelRequestDto createHotelRequestDto) {
+    public ResponseEntity createHotel(@RequestBody @Valid CreateHotelRequestDto createHotelRequestDto) {
         return ResponseEntity.ok(RestResponseEntity.response(hotelService.addHotel(createHotelRequestDto)));
     }
 
     @GetMapping(path = "/get-hotel-by-id/{id}")
-    public ResponseEntity<RestResponseEntity<HotelResponseDto>> getById(@PathVariable String id) {
+    public ResponseEntity getById(@PathVariable String id) {
         return ResponseEntity.ok(RestResponseEntity.response(hotelService.findOne(id)));
     }
 
     @GetMapping(path = "/get/{id}")
-    public ResponseEntity<RestResponseEntity<CreateHotelRequestDto>> getByIdDTO(@PathVariable String id) {
+    public ResponseEntity getByIdDTO(@PathVariable String id) {
         return ResponseEntity.ok(RestResponseEntity.response(hotelService.getHotelDTO(id)));
+    }
+
+    @PostMapping(value = "/search-hotel-all",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity searchHotelAll(@RequestBody HotelSearchDto hotelSearchDto) {
+        return ResponseEntity.ok(RestResponseEntity.response(hotelService.searchAllHotels(hotelSearchDto)));
     }
 }
