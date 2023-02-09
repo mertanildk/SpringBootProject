@@ -1,8 +1,10 @@
 package com.deke.testredisdbjpa.entity.baseEntity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import net.minidev.json.annotate.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -13,7 +15,8 @@ import java.util.UUID;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-@Getter @Setter
+@Getter
+@Setter
 public abstract class BaseEntity implements Serializable {
     @Id
     @GeneratedValue(generator = "system-uuid")
@@ -26,6 +29,7 @@ public abstract class BaseEntity implements Serializable {
     private Date createdAt = new Date();
 
     @Column(name = "deleted")
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private Date deleted;
 
     @Column(name = "lastupdated")
