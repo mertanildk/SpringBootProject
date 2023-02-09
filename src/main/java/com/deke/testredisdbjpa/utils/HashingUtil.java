@@ -15,7 +15,7 @@ public class HashingUtil {
             sha256 = MessageDigest.getInstance("SHA-256");
             byte[] originalBytes = original.getBytes(StandardCharsets.UTF_8);
             byte[] hashed = sha256.digest(originalBytes);
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             for (int i = 0; i < hashed.length; i++) {
                 sb.append(Integer.toString((hashed[i] & 0xff) + 0x100, 16).substring(1));
             }
