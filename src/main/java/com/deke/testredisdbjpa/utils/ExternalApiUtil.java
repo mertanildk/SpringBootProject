@@ -5,6 +5,7 @@ import com.deke.testredisdbjpa.testRest.Doviz;
 import com.deke.testredisdbjpa.testRest.USD;
 import com.google.gson.Gson;
 import lombok.experimental.UtilityClass;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -13,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-@UtilityClass
+
 public class ExternalApiUtil {
 
     private static final String GITHUB_API_URL = "https://api.github.com/users";
@@ -25,7 +26,7 @@ public class ExternalApiUtil {
         }
      */
 
-    public static USD getRecentUSD() {
+    public  USD getRecentUSD() {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));

@@ -69,7 +69,7 @@ public class CustomerHotelRoomServiceImp extends BaseServiceImp<CustomerHotelRoo
     @SneakyThrows
     public String calculatePrice(String id) {
         Pricing pricing = pricingService.findOne(id).stream().findFirst().orElseThrow(() -> new Exception("Pricing not found"));
-        double usd = Double.parseDouble(Objects.requireNonNull(ExternalApiUtil.getRecentUSD().getAlis()));
+        double usd = Double.parseDouble(Objects.requireNonNull(new ExternalApiUtil().getRecentUSD().getAlis()));
         return String.format(Objects.equals(pricing.getMoneyType().toLowerCase(), "dolar") ?
                 pricing.getChildPrice() * usd + pricing.getAdultPrice() * usd + " DOLAR" :
                 pricing.getChildPrice() + pricing.getAdultPrice() + " TL");
