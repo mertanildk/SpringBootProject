@@ -9,6 +9,4 @@ import org.springframework.stereotype.Component;
 @Component
 public interface CustomerHotelRoomService extends BaseService<CustomerHotelRoom,String> {
     CustomerHotelRoom rentARoom(CustomerHotelRoomRequestDto customerHotelRoom);
-    Pricing test(String id);
-    String calculatePrice(String id);
 }

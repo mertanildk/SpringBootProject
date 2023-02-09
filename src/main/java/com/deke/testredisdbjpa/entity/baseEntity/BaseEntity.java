@@ -4,13 +4,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import net.minidev.json.annotate.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.UUID;
 
 
 @MappedSuperclass

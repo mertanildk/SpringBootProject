@@ -6,12 +6,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Component;
 
 
-
 @Component
 public interface FacilityRepository extends BaseRepository<Facility> {
 
     @Query("select f from Facility f where f.specifications = :spesification")
-    Facility getBySpesification(String spesification);
+    Facility getBySpecification(String specification);
 
 
 }

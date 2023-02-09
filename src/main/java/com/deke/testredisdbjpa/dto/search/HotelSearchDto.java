@@ -16,18 +16,3 @@ public class HotelSearchDto {
 
 
 }
-/*
-@Column(name = "hotel_name")
-    private String hotelName;
-
-    @Column(name = "hotel_address")
-    private String hotelAddress;
-
-    @Column(name = "hotel_phone")
-    private String hotelPhone;
-
-    @Column(name = "hotel_email")
-    private String hotelEmail;
-    @Column(name = "hotel_stars")
-    private int star;
- */
