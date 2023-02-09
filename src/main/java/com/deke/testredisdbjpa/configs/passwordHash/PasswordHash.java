@@ -1,4 +1,4 @@
-package com.deke.testredisdbjpa.configs;
+package com.deke.testredisdbjpa.configs.passwordHash;
 
 
 import org.springframework.context.annotation.Bean;
