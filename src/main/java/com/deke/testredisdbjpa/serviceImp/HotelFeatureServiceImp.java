@@ -6,12 +6,8 @@ import com.deke.testredisdbjpa.dto.request.HotelFeatureRequestDto;
 import com.deke.testredisdbjpa.dto.response.HotelFeatureResponseDto;
 import com.deke.testredisdbjpa.entity.HotelFeature;
 import com.deke.testredisdbjpa.repositories.HotelFeatureRepository;
-import com.deke.testredisdbjpa.service.FacilityService;
-import com.deke.testredisdbjpa.service.HostelTypeService;
 import com.deke.testredisdbjpa.service.HotelFeatureService;
-import com.deke.testredisdbjpa.service.HotelService;
 import com.deke.testredisdbjpa.serviceImp.base.BaseServiceImp;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -22,17 +18,12 @@ import java.util.List;
 @Service("hotelFeatureService")
 public class HotelFeatureServiceImp extends BaseServiceImp<HotelFeature, HotelFeature, HotelFeatureRepository, HotelFeature> implements HotelFeatureService {
 
-    @Autowired
-    private HotelFeatureRepository hotelFeatureRepository;
 
-    @Autowired
-    private FacilityService facilityService;
+    private final HotelFeatureRepository hotelFeatureRepository;
 
-    @Autowired
-    private HostelTypeService hostelTypeService;
-
-    @Autowired
-    private HotelService hotelService;
+    public HotelFeatureServiceImp(HotelFeatureRepository hotelFeatureRepository) {
+        this.hotelFeatureRepository = hotelFeatureRepository;
+    }
 
 
     @Override
