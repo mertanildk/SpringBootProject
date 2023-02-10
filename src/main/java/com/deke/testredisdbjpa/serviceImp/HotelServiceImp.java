@@ -48,8 +48,7 @@ public class HotelServiceImp extends BaseServiceImp<Hotel, Hotel, HotelRepositor
     @Override
     public List<Hotel> searchAllHotels(HotelSearchDto hotelSearchDto) {
         HotelSpecification hotelSpecification = new HotelSpecification();
-        List<Hotel> hotelList = hotelRepository.findAll(Specification.where(hotelSpecification.search(hotelSearchDto)));
-        return hotelList;
+        return hotelRepository.findAll(Specification.where(hotelSpecification.search(hotelSearchDto)));
     }
     //List<User> userList = userRepository.findAll(Specification.where(userSpecification.search(userSearchDto)));
 }
