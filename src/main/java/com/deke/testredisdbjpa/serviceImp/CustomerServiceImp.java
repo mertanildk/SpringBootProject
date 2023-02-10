@@ -14,6 +14,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,8 +32,10 @@ public class CustomerServiceImp extends BaseServiceImp<Customer,Customer, Custom
         customer.setPassword(HashingUtil.hashSHA2(customerRequestDto.getPassword()));
         return insert(customer);
     }
+    @Override
     public List<Customer> searchAllCustomers(CustomerSearchDto customerSearchDto){
         CustomerSpecification customerSpecification = new CustomerSpecification();
-        return customerRepository.findAll(Specification.where(customerSpecification.search(customerSearchDto)));
+        return customerRepository.findAll(Specification.anyOf(customerSpecification.search(customerSearchDto)));
+
     }
 }
