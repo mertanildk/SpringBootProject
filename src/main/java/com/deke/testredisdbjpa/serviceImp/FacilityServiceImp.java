@@ -42,13 +42,4 @@ public class FacilityServiceImp extends BaseServiceImp<Facility, Facility, Facil
         facilityRepository.delete(facility);
         return facility;
     }
-
-
-    /*
-    Aop Testini Bu Methodda Yapıyorum @Before After Gibi Methodlar Çalışıyor Silme
-     */
-    @Override
-    public String testMethod2(String name) {
-        return "testMethod2";
-    }
 }
