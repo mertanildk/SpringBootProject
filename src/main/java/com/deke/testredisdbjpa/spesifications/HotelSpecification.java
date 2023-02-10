@@ -16,30 +16,30 @@ public class HotelSpecification {
     public Specification<Hotel> search(HotelSearchDto hotelSearchDto) {
         //Bence çok güzel bi kod oldu
         ArrayList<String> fields = Arrays.stream(Hotel.class.getDeclaredFields()).map(Field::getName).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
-        return (root, query, cb) -> {
+        return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
             if (ObjectUtils.isNotEmpty(hotelSearchDto.getHotelName()))
-                predicates.add(cb.like(root.get(fields.get(0)), hotelSearchDto.getHotelName()));
+                predicates.add(criteriaBuilder.like(root.get(fields.get(0)), hotelSearchDto.getHotelName()));
 
             if (ObjectUtils.isNotEmpty(hotelSearchDto.getHotelAddress()))
-                predicates.add(cb.like(root.get(fields.get(1)), "%" + hotelSearchDto.getHotelAddress()));
+                predicates.add(criteriaBuilder.like(root.get(fields.get(1)), "%" + hotelSearchDto.getHotelAddress()));
 
 
             if (ObjectUtils.isNotEmpty(hotelSearchDto.getHotelPhone()))
-                predicates.add(cb.like(root.get(fields.get(2)), "%" + hotelSearchDto.getHotelAddress()));
+                predicates.add(criteriaBuilder.like(root.get(fields.get(2)), "%" + hotelSearchDto.getHotelAddress()));
 
 
             if (ObjectUtils.isNotEmpty(hotelSearchDto.getHotelEmail()))
-                predicates.add(cb.like(root.get(fields.get(3)), "%" + hotelSearchDto.getHotelEmail()));
+                predicates.add(criteriaBuilder.like(root.get(fields.get(3)), "%" + hotelSearchDto.getHotelEmail()));
 
 
             /* Integer aramanın yolunu bulmamız gerekiyor.
             if (ObjectUtils.isNotEmpty(hotelSearchDto.getStar()))
-                predicates.add(cb.like(root.get(fields.get(4)), "%" + hotelSearchDto.getStar()));
+                predicates.add(criteriaBuilder.like(root.get(fields.get(4)), "%" + hotelSearchDto.getStar()));
 
              */
 
-            return cb.and(predicates.toArray(new Predicate[0]));
+            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
 
 
