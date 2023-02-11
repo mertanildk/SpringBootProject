@@ -34,8 +34,7 @@ public class CustomerServiceImp extends BaseServiceImp<Customer,Customer, Custom
     }
     @Override
     public List<Customer> searchAllCustomers(CustomerSearchDto customerSearchDto){
-        CustomerSpecification customerSpecification = new CustomerSpecification();
-        return customerRepository.findAll(Specification.anyOf(customerSpecification.search(customerSearchDto)));
+        return customerRepository.findAll(Specification.anyOf(new CustomerSpecification().search(customerSearchDto)));
 
     }
 }
