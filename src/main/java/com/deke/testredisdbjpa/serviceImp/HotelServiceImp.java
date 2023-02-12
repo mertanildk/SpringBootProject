@@ -6,7 +6,7 @@ import com.deke.testredisdbjpa.entity.Hotel;
 import com.deke.testredisdbjpa.repositories.HotelRepository;
 import com.deke.testredisdbjpa.service.HotelService;
 import com.deke.testredisdbjpa.serviceImp.base.BaseServiceImp;
-import com.deke.testredisdbjpa.utils.spesifications.HotelSpecification;
+import com.deke.testredisdbjpa.spesifications.HotelSpecification;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.cache.annotation.CacheEvict;

@@ -11,7 +11,7 @@ import com.deke.testredisdbjpa.service.CustomerService;
 import com.deke.testredisdbjpa.service.HotelRoomService;
 import com.deke.testredisdbjpa.serviceImp.base.BaseServiceImp;
 import com.deke.testredisdbjpa.utils.messages.ExceptionMessages;
-import com.deke.testredisdbjpa.utils.modelMapper.ModelMapperService;
+import com.deke.testredisdbjpa.utils.mapping.modelMapper.ModelMapperService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
