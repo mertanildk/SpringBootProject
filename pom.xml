@@ -64,7 +64,12 @@
             <version>3.1.1</version>
         </dependency>
 
-
+        <!-- RabbitMQ Advanced Message Queuing Protocol -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+        <!-- RabbitMQ Advanced Message Queuing Protocol -->
 
         <dependency>
             <groupId>org.postgresql</groupId>
