@@ -3,7 +3,7 @@ package com.deke.testredisdbjpa.api.controllers;
 
 import com.deke.testredisdbjpa.entity.dto.request.RoomRequestDto;
 import com.deke.testredisdbjpa.entity.Room;
-import com.deke.testredisdbjpa.responseApi.RestResponseEntity;
+import com.deke.testredisdbjpa.utils.responseApi.RestResponseEntity;
 import com.deke.testredisdbjpa.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

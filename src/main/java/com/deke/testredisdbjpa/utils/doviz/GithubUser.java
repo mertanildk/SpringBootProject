@@ -1,4 +1,4 @@
-package com.deke.testredisdbjpa.testRest;
+package com.deke.testredisdbjpa.utils.doviz;
 
 
 import lombok.Data;

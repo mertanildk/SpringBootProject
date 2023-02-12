@@ -6,7 +6,7 @@ import com.deke.testredisdbjpa.entity.dto.request.HotelFeatureRequestDto;
 import com.deke.testredisdbjpa.entity.dto.response.HotelFeatureResponseDto;
 import com.deke.testredisdbjpa.entity.dto.response.HotelResponseDto;
 import com.deke.testredisdbjpa.entity.HotelFeature;
-import com.deke.testredisdbjpa.responseApi.RestResponseEntity;
+import com.deke.testredisdbjpa.utils.responseApi.RestResponseEntity;
 import com.deke.testredisdbjpa.service.HotelFeatureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

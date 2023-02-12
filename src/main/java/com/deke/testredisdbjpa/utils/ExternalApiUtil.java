@@ -1,11 +1,9 @@
 package com.deke.testredisdbjpa.utils;
 
 
-import com.deke.testredisdbjpa.testRest.Doviz;
-import com.deke.testredisdbjpa.testRest.USD;
+import com.deke.testredisdbjpa.utils.doviz.Doviz;
+import com.deke.testredisdbjpa.utils.doviz.USD;
 import com.google.gson.Gson;
-import lombok.experimental.UtilityClass;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;

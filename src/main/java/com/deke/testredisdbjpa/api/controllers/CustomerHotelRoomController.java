@@ -2,7 +2,7 @@ package com.deke.testredisdbjpa.api.controllers;
 
 
 import com.deke.testredisdbjpa.entity.dto.request.CustomerHotelRoomRequestDto;
-import com.deke.testredisdbjpa.responseApi.RestResponseEntity;
+import com.deke.testredisdbjpa.utils.responseApi.RestResponseEntity;
 import com.deke.testredisdbjpa.service.CustomerHotelRoomService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

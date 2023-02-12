@@ -1,4 +1,4 @@
-package com.deke.testredisdbjpa.utils.spesifications;
+package com.deke.testredisdbjpa.spesifications;
 
 import com.deke.testredisdbjpa.entity.dto.search.HotelSearchDto;
 import com.deke.testredisdbjpa.entity.Hotel;

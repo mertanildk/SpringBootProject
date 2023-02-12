@@ -1,4 +1,4 @@
-package com.deke.testredisdbjpa.utils.modelMapper;
+package com.deke.testredisdbjpa.utils.mapping.modelMapper;
 
 import org.modelmapper.ModelMapper;
 

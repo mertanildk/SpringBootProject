@@ -2,7 +2,7 @@ package com.deke.testredisdbjpa.api.controllers;
 
 
 import com.deke.testredisdbjpa.entity.HostelType;
-import com.deke.testredisdbjpa.responseApi.RestResponseEntity;
+import com.deke.testredisdbjpa.utils.responseApi.RestResponseEntity;
 import com.deke.testredisdbjpa.service.HostelTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

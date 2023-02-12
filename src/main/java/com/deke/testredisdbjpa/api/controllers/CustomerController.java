@@ -2,7 +2,7 @@ package com.deke.testredisdbjpa.api.controllers;
 
 import com.deke.testredisdbjpa.entity.dto.request.CustomerRequestDto;
 import com.deke.testredisdbjpa.entity.dto.search.CustomerSearchDto;
-import com.deke.testredisdbjpa.responseApi.RestResponseEntity;
+import com.deke.testredisdbjpa.utils.responseApi.RestResponseEntity;
 import com.deke.testredisdbjpa.service.CustomerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

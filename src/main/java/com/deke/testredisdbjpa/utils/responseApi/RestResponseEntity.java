@@ -1,4 +1,4 @@
-package com.deke.testredisdbjpa.responseApi;
+package com.deke.testredisdbjpa.utils.responseApi;
 
 import org.assertj.core.util.Lists;
 

@@ -1,4 +1,4 @@
-package com.deke.testredisdbjpa.utils.modelMapper;
+package com.deke.testredisdbjpa.utils.mapping.modelMapper;
 
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;

@@ -3,7 +3,7 @@ package com.deke.testredisdbjpa.api.controllers;
 
 import com.deke.testredisdbjpa.entity.dto.request.FacilityRequestDto;
 import com.deke.testredisdbjpa.entity.Facility;
-import com.deke.testredisdbjpa.responseApi.RestResponseEntity;
+import com.deke.testredisdbjpa.utils.responseApi.RestResponseEntity;
 import com.deke.testredisdbjpa.service.FacilityService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

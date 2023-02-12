@@ -3,7 +3,7 @@ package com.deke.testredisdbjpa.api.controllers;
 
 import com.deke.testredisdbjpa.entity.dto.request.CreateHotelRequestDto;
 import com.deke.testredisdbjpa.entity.dto.search.HotelSearchDto;
-import com.deke.testredisdbjpa.responseApi.RestResponseEntity;
+import com.deke.testredisdbjpa.utils.responseApi.RestResponseEntity;
 import com.deke.testredisdbjpa.service.HotelService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
