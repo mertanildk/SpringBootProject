@@ -16,4 +16,8 @@ public class PasswordHashedServiceImp implements PasswordHashedService {
         return argon2PasswordEncoder.encode(password);
 
     }
+    @Override
+    public boolean isPasswordMatch(String password, String hashedPassword) {
+        return  argon2PasswordEncoder.matches(password, hashedPassword);
+    }
 }
