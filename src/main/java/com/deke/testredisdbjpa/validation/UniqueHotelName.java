@@ -1,7 +1,7 @@
 package com.deke.testredisdbjpa.validation;
 
 
-import com.deke.testredisdbjpa.constants.messageConstants.ValidationMessages;
+import com.deke.testredisdbjpa.utils.messages.ValidationMessages;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UniqueHotelName {
 
-    String message() default ValidationMessages.UNIQUE_HOTEL_NAME;
+    String message() default ValidationMessages.UNIQUE_NAME;
 
     Class<?>[] groups() default {};
 
