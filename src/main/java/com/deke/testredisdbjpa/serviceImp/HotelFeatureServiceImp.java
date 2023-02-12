@@ -1,9 +1,9 @@
 package com.deke.testredisdbjpa.serviceImp;
 
 
-import com.deke.testredisdbjpa.dto.request.CreateHotelFeatureRequestDto;
-import com.deke.testredisdbjpa.dto.request.HotelFeatureRequestDto;
-import com.deke.testredisdbjpa.dto.response.HotelFeatureResponseDto;
+import com.deke.testredisdbjpa.entity.dto.request.CreateHotelFeatureRequestDto;
+import com.deke.testredisdbjpa.entity.dto.request.HotelFeatureRequestDto;
+import com.deke.testredisdbjpa.entity.dto.response.HotelFeatureResponseDto;
 import com.deke.testredisdbjpa.entity.HotelFeature;
 import com.deke.testredisdbjpa.repositories.HotelFeatureRepository;
 import com.deke.testredisdbjpa.service.HotelFeatureService;

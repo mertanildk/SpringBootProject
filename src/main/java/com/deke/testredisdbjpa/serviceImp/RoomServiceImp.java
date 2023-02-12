@@ -1,12 +1,10 @@
 package com.deke.testredisdbjpa.serviceImp;
 
-import com.deke.testredisdbjpa.dto.request.RoomRequestDto;
+import com.deke.testredisdbjpa.entity.dto.request.RoomRequestDto;
 import com.deke.testredisdbjpa.entity.Room;
 import com.deke.testredisdbjpa.repositories.RoomRepository;
-import com.deke.testredisdbjpa.service.HotelService;
 import com.deke.testredisdbjpa.service.RoomService;
 import com.deke.testredisdbjpa.serviceImp.base.BaseServiceImp;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

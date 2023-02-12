@@ -1,6 +1,6 @@
 package com.deke.testredisdbjpa.serviceImp;
 
-import com.deke.testredisdbjpa.dto.request.PricingRequestDto;
+import com.deke.testredisdbjpa.entity.dto.request.PricingRequestDto;
 import com.deke.testredisdbjpa.entity.Pricing;
 import com.deke.testredisdbjpa.repositories.PricingRepository;
 import com.deke.testredisdbjpa.service.*;

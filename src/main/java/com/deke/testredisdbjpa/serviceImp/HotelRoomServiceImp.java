@@ -1,6 +1,6 @@
 package com.deke.testredisdbjpa.serviceImp;
 
-import com.deke.testredisdbjpa.dto.request.HotelRoomRequestDto;
+import com.deke.testredisdbjpa.entity.dto.request.HotelRoomRequestDto;
 import com.deke.testredisdbjpa.entity.HotelRoom;
 import com.deke.testredisdbjpa.repositories.HotelRoomRepository;
 import com.deke.testredisdbjpa.service.HotelRoomService;

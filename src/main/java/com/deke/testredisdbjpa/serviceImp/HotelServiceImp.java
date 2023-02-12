@@ -1,14 +1,12 @@
 package com.deke.testredisdbjpa.serviceImp;
 
-import com.deke.testredisdbjpa.dto.request.CreateHotelRequestDto;
-import com.deke.testredisdbjpa.dto.search.HotelSearchDto;
+import com.deke.testredisdbjpa.entity.dto.request.CreateHotelRequestDto;
+import com.deke.testredisdbjpa.entity.dto.search.HotelSearchDto;
 import com.deke.testredisdbjpa.entity.Hotel;
 import com.deke.testredisdbjpa.repositories.HotelRepository;
-import com.deke.testredisdbjpa.service.HostelTypeService;
 import com.deke.testredisdbjpa.service.HotelService;
-import com.deke.testredisdbjpa.service.RoomService;
 import com.deke.testredisdbjpa.serviceImp.base.BaseServiceImp;
-import com.deke.testredisdbjpa.spesifications.HotelSpecification;
+import com.deke.testredisdbjpa.utils.spesifications.HotelSpecification;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.cache.annotation.CacheEvict;

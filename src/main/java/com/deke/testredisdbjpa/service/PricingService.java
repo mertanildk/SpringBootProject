@@ -1,7 +1,7 @@
 package com.deke.testredisdbjpa.service;
 
 
-import com.deke.testredisdbjpa.dto.request.PricingRequestDto;
+import com.deke.testredisdbjpa.entity.dto.request.PricingRequestDto;
 import com.deke.testredisdbjpa.entity.Pricing;
 import com.deke.testredisdbjpa.service.base.BaseService;
 import org.springframework.stereotype.Component;

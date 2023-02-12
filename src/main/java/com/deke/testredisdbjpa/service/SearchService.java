@@ -1,7 +1,7 @@
 package com.deke.testredisdbjpa.service;
 
 
-import com.deke.testredisdbjpa.dto.request.SearchRequestDto;
+import com.deke.testredisdbjpa.entity.dto.request.SearchRequestDto;
 import org.springframework.stereotype.Component;
 
 

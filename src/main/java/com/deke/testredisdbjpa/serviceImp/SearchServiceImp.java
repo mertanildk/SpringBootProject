@@ -1,10 +1,8 @@
 package com.deke.testredisdbjpa.serviceImp;
 
-import com.deke.testredisdbjpa.dto.request.SearchRequestDto;
+import com.deke.testredisdbjpa.entity.dto.request.SearchRequestDto;
 import com.deke.testredisdbjpa.service.PricingService;
 import com.deke.testredisdbjpa.service.SearchService;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 

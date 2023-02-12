@@ -1,7 +1,7 @@
 package com.deke.testredisdbjpa.serviceImp.base;
 
 import com.deke.testredisdbjpa.entity.baseEntity.BaseEntity;
-import com.deke.testredisdbjpa.exceptions.NonMatchedAnyEntityException;
+import com.deke.testredisdbjpa.utils.exceptions.NonMatchedAnyEntityException;
 import com.deke.testredisdbjpa.repositories.base.BaseRepository;
 import com.deke.testredisdbjpa.service.base.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
