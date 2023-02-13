@@ -3,9 +3,11 @@ package com.deke.testredisdbjpa.utils.exceptions;
 
 import com.deke.testredisdbjpa.entity.dto.request.MailDto;
 import com.deke.testredisdbjpa.entity.Hotel;
+import com.deke.testredisdbjpa.testRabbitMq.Runner;
 import com.deke.testredisdbjpa.utils.mernis.EURKPSPublicSoap;
 import com.deke.testredisdbjpa.utils.mailSender.EmailServiceImp;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
@@ -13,22 +15,21 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/api")
+@RequiredArgsConstructor
 public class TestController {
 
-    private EmailServiceImp emailServiceImp;
-
-    public TestController(EmailServiceImp emailServiceImp) {
-        this.emailServiceImp = emailServiceImp;
-    }
+    private final EmailServiceImp emailServiceImp;
+    private final Runner runner;
 
     @GetMapping(path = "/test")
     public ResponseEntity<String> test() {
         throw new RestRuntimeException("testo", "1testV.2");
     }
 
-    @GetMapping(path = "/test2")
-    public ResponseEntity<String> test2() {
-        throw new NullInputException("00.V2N.I");
+    @PostMapping(path = "/test2")
+    public ResponseEntity<String> test2() throws Exception {
+        runner.run();
+        return ResponseEntity.ok("sent");
     }
 
     @GetMapping(path = "/test6")
