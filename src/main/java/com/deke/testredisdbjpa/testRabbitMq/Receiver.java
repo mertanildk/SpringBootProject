@@ -12,5 +12,6 @@ public class Receiver {
         System.out.println("Received <" + message + ">");
         latch.countDown();
     }
+
     public CountDownLatch getLatch(){return latch;}
 }
