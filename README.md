@@ -1,3 +1,3 @@
-Im learning new things in this repo
+Im learn and i try new things in this repo
 
 
