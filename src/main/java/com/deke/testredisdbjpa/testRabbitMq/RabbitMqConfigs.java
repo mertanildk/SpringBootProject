@@ -13,8 +13,9 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitMqConfigs {
-     static final String EXCHANGE_NAME = "spring-boot-exchange";
-     static final String queueName = "spring-boot";
+
+    static final String EXCHANGE_NAME = "spring-boot-exchange";
+    static final String queueName = "spring-boot";
 
     @Bean
     Queue queue() {
