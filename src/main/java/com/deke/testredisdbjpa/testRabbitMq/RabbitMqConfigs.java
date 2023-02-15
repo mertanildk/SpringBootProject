@@ -1,12 +1,7 @@
 package com.deke.testredisdbjpa.testRabbitMq;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.TopicExchange;
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
-import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
+import org.springframework.amqp.core.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,36 +9,53 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMqConfigs {
 
-    static final String EXCHANGE_NAME = "spring-boot-exchange";
-    static final String queueName = "spring-boot";
 
+    @Value("${sr.rabbit.queue.name}")
+    private String queueName;
+
+
+    @Value("${sr.rabbit.queue.name2}")
+    private String queueName2;
+
+    @Value("${sr.rabbit.routing.name}")
+    private String routingName;
+
+    @Value("${sr.rabbit.exchange.name}")
+    private String exchangeName;
+
+
+    /**
+     * The queue() function creates a queue with the name "my-queue" and durable set to true
+     *
+     * @return A queue object
+     */
     @Bean
-    Queue queue() {
-        return new Queue(queueName, false);
+    public Queue queue() {
+        return new Queue(queueName, true);
     }
 
     @Bean
-    TopicExchange exchange() {
-        return new TopicExchange(EXCHANGE_NAME);
+    public Queue queue2() {return new Queue(queueName2, true);}
+
+    /**
+     * The function creates a direct exchange with the name of the exchangeName variable
+     *
+     * @return A DirectExchange object.
+     */
+    @Bean
+    public DirectExchange directExchange() {
+        return new DirectExchange(exchangeName);
     }
 
+    /**
+     * Bind the queue to the exchange with the routing key.
+     *
+     * @param queue          The name of the queue.
+     * @param directExchange The exchange to which the queue is bound.
+     * @return A Binding object.
+     */
     @Bean
-    Binding binding(Queue queue, TopicExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with("foo.bar.#");
-    }
-
-    @Bean
-    SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
-                                             MessageListenerAdapter listenerAdapter) {
-        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
-        container.setConnectionFactory(connectionFactory);
-        container.setQueueNames(queueName);
-        container.setMessageListener(listenerAdapter);
-        return container;
-    }
-
-    @Bean
-    MessageListenerAdapter listenerAdapter(Receiver receiver) {
-        return new MessageListenerAdapter(receiver, "receiveMessage");
+    public Binding binding(final Queue queue, final DirectExchange directExchange) {
+        return BindingBuilder.bind(queue).to(directExchange).with(routingName);
     }
 }
