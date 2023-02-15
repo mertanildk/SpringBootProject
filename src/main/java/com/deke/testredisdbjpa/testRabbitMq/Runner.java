@@ -10,16 +10,18 @@ import org.springframework.stereotype.Component;
 public class Runner implements CommandLineRunner {
 
     private final String routingName = "routingKey";
+    private final String routingName1 = "routingKey1";
     private final String exchangeName = "exchange";
 
     private final RabbitTemplate rabbitTemplate;
 
     @Override
     public void run(String... args) throws InterruptedException {
-        System.out.println("Sending message every 2 seconds...");
-        while (true){
-            Thread.sleep(10);
+        System.out.println("Sending message");
+        while (true) {
+            Thread.sleep(100);
             rabbitTemplate.convertAndSend(exchangeName, routingName, "Hello World!");
+            rabbitTemplate.convertAndSend(exchangeName, routingName1, "ROOTING2 WORKS!");
         }
 
     }
