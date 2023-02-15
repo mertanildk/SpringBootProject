@@ -15,14 +15,5 @@ public class TestRedisDbJpaApplication {
     public static void main(String[] args) {
         SpringApplication.run(TestRedisDbJpaApplication.class, args);
     }
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
-    @Bean
-    public HttpHeaders httpHeaders(){return new HttpHeaders();}
-
-
-
 
 }
