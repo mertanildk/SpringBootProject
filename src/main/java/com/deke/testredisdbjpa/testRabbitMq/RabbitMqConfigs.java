@@ -23,6 +23,9 @@ public class RabbitMqConfigs {
     @Value("${sr.rabbit.exchange.name}")
     private String exchangeName;
 
+    @Value("${sr.rabbit.routing.name2}")
+    private String routingName2;
+
 
     /**
      * The queue() function creates a queue with the name "my-queue" and durable set to true
@@ -58,4 +61,10 @@ public class RabbitMqConfigs {
     public Binding binding(final Queue queue, final DirectExchange directExchange) {
         return BindingBuilder.bind(queue).to(directExchange).with(routingName);
     }
+
+    @Bean
+    public Binding binding2(final Queue queue, final DirectExchange directExchange) {
+        return BindingBuilder.bind(queue).to(directExchange).with(routingName2);
+    }
+
 }
