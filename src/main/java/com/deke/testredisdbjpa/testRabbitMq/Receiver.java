@@ -23,4 +23,14 @@ public class Receiver {
         System.out.println("Received <" + message + "3>");
     }
 
+    @RabbitListener(queues = "queue1")
+    public void receiveMessage3(String message) {
+        System.out.println(message);
+    }
+
+    @RabbitListener(queues = "queue1")
+    public void receiveMessage4(String message) {
+        System.out.println(message);
+    }
+
 }
