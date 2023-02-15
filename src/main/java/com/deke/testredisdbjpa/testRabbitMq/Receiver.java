@@ -1,17 +1,26 @@
 package com.deke.testredisdbjpa.testRabbitMq;
 
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
-
-import java.util.concurrent.CountDownLatch;
 
 @Component
 public class Receiver {
-    private CountDownLatch latch = new CountDownLatch(1);
+    //TODO : MESAJI BAŞKA BİR UYGULAMADAN YAKALA BAKALIM.
 
+
+    @RabbitListener(queues = "queue")
     public void receiveMessage(String message) {
-        System.out.println("Received <" + message + ">");
-        latch.countDown();
+        System.out.println("Received <" + message + "1>");
     }
 
-    public CountDownLatch getLatch(){return latch;}
+    @RabbitListener(queues = "queue")
+    public void receiveMessage1(String message) {
+        System.out.println("Received <" + message + "2>");
+    }
+
+    @RabbitListener(queues = "queue")
+    public void receiveMessage2(String message) {
+        System.out.println("Received <" + message + "3>");
+    }
+
 }
