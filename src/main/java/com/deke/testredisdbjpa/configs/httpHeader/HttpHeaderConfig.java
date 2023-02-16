@@ -1,4 +1,4 @@
-package com.deke.testredisdbjpa.configs.cache.httpHeader;
+package com.deke.testredisdbjpa.configs.httpHeader;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
