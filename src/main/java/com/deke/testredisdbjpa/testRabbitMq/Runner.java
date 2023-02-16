@@ -17,12 +17,14 @@ public class Runner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws InterruptedException {
+        /*
         System.out.println("Sending message");
         while (true) {
             Thread.sleep(100);
             rabbitTemplate.convertAndSend(exchangeName, routingName, "Hello World!");
             rabbitTemplate.convertAndSend(exchangeName, routingName1, "ROOTING2 WORKS!");
         }
+         */
 
     }
 }
