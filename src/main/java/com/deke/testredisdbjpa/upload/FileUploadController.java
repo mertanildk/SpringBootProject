@@ -19,7 +19,6 @@ public class FileUploadController {
 
     @PostMapping("/upload")
     public ResponseEntity<FileUpload> uploadFile(
-
             @RequestParam(value = "file") MultipartFile multipartFile)
             throws IOException {
 
@@ -27,11 +26,10 @@ public class FileUploadController {
         long size = multipartFile.getSize();
 
         String filecode = FileUploadUtil.saveFile(fileName, multipartFile);
-
         FileUpload response = new FileUpload();
         response.setFileName(fileName);
         response.setSize(size);
-        response.setDownloadUrl("/Users/mertanil/Desktop/testPackage/" + filecode);
+        response.setDownloadUrl("/Users/mertanil/Desktop/testPackage/" + filecode + multipartFile.getName());
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
