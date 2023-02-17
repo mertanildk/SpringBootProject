@@ -1,5 +1,3 @@
-
-
 package com.deke.testredisdbjpa.upload;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -13,15 +11,16 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 public class FileUploadUtil {
+    private FileUploadUtil() {}
+
     public static String saveFile(String fileName, MultipartFile multipartFile)
             throws IOException {
-        Path uploadPath = Paths.get("Files-Upload");
+        Path uploadPath = Paths.get("/Users/mertanil/Desktop/testPackage/FileUpload");
 
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
         }
-
-        String fileCode = RandomStringUtils.randomAlphanumeric(8);
+        String fileCode = RandomStringUtils.randomAlphanumeric(12);
 
         try (InputStream inputStream = multipartFile.getInputStream()) {
             Path filePath = uploadPath.resolve(fileCode + "-" + fileName);
@@ -29,7 +28,6 @@ public class FileUploadUtil {
         } catch (IOException ioe) {
             throw new IOException("Could not save file: " + fileName, ioe);
         }
-
         return fileCode;
     }
 }
