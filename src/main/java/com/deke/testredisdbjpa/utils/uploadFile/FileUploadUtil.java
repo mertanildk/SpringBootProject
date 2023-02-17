@@ -1,4 +1,4 @@
-package com.deke.testredisdbjpa.upload;
+package com.deke.testredisdbjpa.utils.uploadFile;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,8 +25,8 @@ public class FileUploadUtil {
         try (InputStream inputStream = multipartFile.getInputStream()) {
             Path filePath = uploadPath.resolve(fileCode + "-" + fileName);
             Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException ioe) {
-            throw new IOException("Could not save file: " + fileName, ioe);
+        } catch (IOException exp) {
+            throw new IOException("Could not save file: " + fileName, exp);
         }
         return fileCode;
     }

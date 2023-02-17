@@ -1,5 +1,7 @@
-package com.deke.testredisdbjpa.upload;
+package com.deke.testredisdbjpa.api.controllers.uploadFileController;
 
+import com.deke.testredisdbjpa.entity.uploadFile.FileUpload;
+import com.deke.testredisdbjpa.utils.uploadFile.FileUploadUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;

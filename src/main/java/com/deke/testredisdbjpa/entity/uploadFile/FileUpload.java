@@ -1,4 +1,4 @@
-package com.deke.testredisdbjpa.upload;
+package com.deke.testredisdbjpa.entity.uploadFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
