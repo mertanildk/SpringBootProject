@@ -5,7 +5,6 @@ import com.deke.testredisdbjpa.utils.responseApi.RestResponseEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.Cacheable;
 
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class MongoController {
     }
 
     @PostMapping("/save-phone")
-    public ResponseEntity<RestResponseEntity<User>> savePhone(@RequestBody Phone phone) {
+    public ResponseEntity<RestResponseEntity<User>> savePhone(@RequestBody Obj phone) {
         phoneRepository.save(phone);
         return ResponseEntity.ok(RestResponseEntity.response(phone));
     }
@@ -37,11 +36,11 @@ public class MongoController {
 
     @GetMapping("/getAllPhone")
     @ResponseBody
-    public ResponseEntity<List<Phone>> getAllPhone() {
+    public ResponseEntity<List<Obj>> getAllPhone() {
         return ResponseEntity.ok(getAllPhone1());
     }
 
-    private List<Phone> getAllPhone1() {
+    private List<Obj> getAllPhone1() {
         return phoneRepository.findAll();
     }
 }
