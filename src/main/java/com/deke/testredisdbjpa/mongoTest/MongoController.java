@@ -15,7 +15,7 @@ public class MongoController {
 
 
     private final UserRepository userRepository;
-    private final PhoneRepository phoneRepository;
+    private final ObjRepository phoneRepository;
 
     @PostMapping("/save")
     public ResponseEntity<RestResponseEntity<User>> save(@RequestBody User user) {
