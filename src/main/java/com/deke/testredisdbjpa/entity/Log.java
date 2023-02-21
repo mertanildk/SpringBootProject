@@ -16,12 +16,10 @@ public class Log {
     private String oid;
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt = new Date();
-
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private Date deleted;
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastupdated = new Date();
-
     private String userName;
     private String operation;
     private String time;
