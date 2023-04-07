@@ -1,3 +1,1 @@
-I learn and i try new things in this repo
-
-
+I try and learn new technologies and business rules I want to try in this repo.
