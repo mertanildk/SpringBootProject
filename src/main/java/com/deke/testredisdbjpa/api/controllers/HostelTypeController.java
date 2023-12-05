@@ -14,8 +14,11 @@ import java.util.List;
 @RequestMapping(path = "/hostel-type")
 public class HostelTypeController {
 
-    @Autowired
-    private HostelTypeService hostelTypeService;
+    private final HostelTypeService hostelTypeService;
+
+    public HostelTypeController(HostelTypeService hostelTypeService) {
+        this.hostelTypeService = hostelTypeService;
+    }
 
     @PostMapping("/create-hostel-type")
     public ResponseEntity<RestResponseEntity<HostelType>> createHostelType(@RequestBody List<String> hostelTypeNames){

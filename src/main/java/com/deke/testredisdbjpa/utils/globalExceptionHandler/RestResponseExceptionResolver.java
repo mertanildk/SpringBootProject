@@ -9,7 +9,6 @@ import org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver;
 import java.io.IOException;
 
 
-
 @Component
 // bu class ne işe yarıyor anlamadım
 
@@ -38,7 +37,7 @@ public class RestResponseExceptionResolver extends AbstractHandlerExceptionResol
         try {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, ex.getMessage());
         } catch (IOException e) {
-            System.out.println("Error sending 400 error code " + handler.getClass()+ e.getMessage());
+            System.out.println("Error sending 400 error code " + handler.getClass() + e.getMessage());
 
         }
         return new ModelAndView();
